@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Griffitrons #1661 Dashboard</title>
+    <link href="src/css/style.css" rel="stylesheet">
+</head>
+
+<body onload="onStart();">
+    <header>
+	    <div id="title" > The GRIFFITRONS </div>
+	    <div id="subtitle"> FRC #1661 </div>
+	    <img src="src/img/logo.png" width="180" height="120" id="logo"/>
+    	<div id="name">Kurt</div>
+    	<div id="timer">REMAINING TIME: 0:00</div>
+    	<div id="robot-state">ROBOT STATUS: unknown</div>
+    </header>
+
+    <div id="field">
+       <div id="fieldlabel">Field</div>
+	     <img src="src/img/field.png" width="210" height="420" id="fieldimg"/>
+       <img src="src/img/left.png" width="210" height="420" id="leftimg"/>
+       <img src="src/img/leftpants.png" width="210" height="420" id="leftpantsimg"/>
+       <img src="src/img/middle.png" width="210" height="420" id="middleimg"/>
+       <img src="src/img/middlepants.png" width="210" height="420" id="middlepantsimg"/>
+       <img src="src/img/right.png" width="210" height="420" id="rightimg"/>
+       <img src="src/img/rightpants.png" width="210" height="420" id="rightpantsimg"/>
+       <div id="scale3left"></div>
+       <div id="scale3right"></div>
+       <div id="scale2left"></div>
+       <div id="scale2right"></div>
+       <div id="scale1left"></div>
+       <div id="scale1right"></div>
+       <div id="teamcolor"></div>
+       <div id="opponentcolor"></div>
+       <div id="leftcircle"></div>
+       <div id="middlecircle"></div>
+       <div id="rightcircle"></div>
+    </div>
+
+    <div id="gyro">
+       <img src="src/img/gyro.png" width="180" height="180" id="gyroimg"/>
+       <img src="src/img/arrow.png" width="9" height="90" id="arrowimg"/>
+       <div id="gyronum">0º</div>
+       <div id="gyroreset">Zero</div>
+	     <label>Orientation</label>
+    </div>
+
+    <div id="encoder">
+       <div id="flcircle"><div id="flencval">0.0</div></div>
+       <div id="frcircle"><div id="frencval">0.0</div></div>
+       <div id="blcircle"><div id="blencval">0.0</div></div>
+       <div id="brcircle"><div id="brencval">0.0</div></div>
+       <div id="encreset">Zero</div>
+	     <label>Encoder Values (Feet)</label>
+    </div>
+
+    <div id="auto">
+      <div id="autoleft">Left</div>
+      <div id="automiddle">Middle</div>
+      <div id="autoright">Right</div>
+      <div id="pants">
+        P.A.N.T.S.<div id="pantson">On</div><div id="pantsoff">Off</div>
+      </div>
+	    <div id="autolabel">Auto Select</div>
+    </div>
+
+    <div id="robot">
+	     <img src="src/img/robot.png" width="300" height="400" id="robotimg"/>
+       <div id="fldrivebar">0.00</div>
+       <div id="frdrivebar">0.00</div>
+       <div id="bldrivebar">0.00</div>
+       <div id="brdrivebar">0.00</div>
+       <div id="intakebar">0.00</div>
+       <div id="intakerotatebar">0.00</div>
+       <div id="elevatorbar">0.00</div>
+	     <label>Robot Diagram</label>
+    </div>
+
+    <div id="pid">
+         P: <input type="text" name="p" id="pfield"><br><br>
+         I: <input type="text" name="i" id="ifield"><br><br>
+         D: <input type="text" name="d" id="dfield"><br><br>
+         <div id="save">Save Values</div>
+	     <label>PID Tuning</label>
+    </div>
+
+    <div id="power">
+       Battery Voltage<br>
+       <div id="voltagebar">0.00V</div><br>
+       Total Power Draw<br>
+       <div id="totaldrawbar">0.00A</div>
+       <div id="powerdraw">
+         Drive Train<br>
+         <div id="drivedrawbar">0.00A</div>
+         Intake<br>
+         <div id="intakedrawbar">0.00A</div>
+         Intake Pivot<br>
+         <div id="intakerotatedrawbar">0.00A</div>
+         Elevator<br>
+         <div id="elevatordrawbar">0.00A</div>
+       </div><br>
+       <div id="memevalues">
+         Velocity<br>
+         <div id="velocitybar">0.00 m/s</div>
+         Acceleration<br>
+         <div id="accelerationbar">0.00 m/s<sup>2</sup></div>
+         Temperature<br>
+         <div id="temperaturebar">0.00ºF</div>
+       </div>
+	     <label>Power</label>
+    </div>
+
+    <div id="led">
+	     <label>LED Display</label>
+    </div>
+
+    <div id="login">
+        <input id="connect-address" type="text" value="localhost" disabled>
+        <button id="connect" disabled>Connecting</button>
+    </div>
+    <script src="src/networktables/networktables.js"></script>
+    <script src="src/connection.js"></script>
+    <script src="src/ui.js"></script>
+</body>
+</html>
