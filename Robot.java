@@ -14,6 +14,10 @@ package org.usfirst.frc.team1661.robot;
  * 	Make sure the code isn't broken- wpilib changes things every year!
  */
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 /**
  * Imports
  * Most come from wpilib
@@ -36,7 +40,7 @@ import com.kauailabs.navx.frc.AHRS;
 /**
  * @author Nate Tausik & The Power of Friendship
  * @team   Griffitrons #1661
- * @year   2018 Season
+ * @year   2018 FRC Season
  * 
  * Mecanum Drive with setpoint autonomous
  * Interfaces with custom dashboard adapted from FRCDashboard
@@ -82,6 +86,13 @@ public class Robot extends IterativeRobot {
 	 */
 	XboxController cubeController = new XboxController(0);
 	XboxController driveController = new XboxController(1);
+	
+	/**
+	 * Timer that measures how long auto has been recorded for. The queue stores the actions taken in auto.
+	 */
+	Timer autoTime = new Timer();
+	Queue<DriveFrame> auto = new LinkedList<>();
+	Queue<DriveFrame> playing = new LinkedList<>();
 
 	/**
 	 * Constants that are used so setpoint units can be easily converted to feet or wheel rotations (see below)
@@ -226,7 +237,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("voltage", RobotController.getBatteryVoltage());
 		SmartDashboard.putNumber("totaldraw", PowerJNI.getVinCurrent());
 		SmartDashboard.putNumber("drivedraw", fLeft.getOutputCurrent() + bLeft.getOutputCurrent() 
-												+ fRight.getOutputCurrent() + bRight.getOutputCurrent());
+		+ fRight.getOutputCurrent() + bRight.getOutputCurrent());
 		SmartDashboard.putNumber("intakedraw", intake1.getOutputCurrent() + intake2.getOutputCurrent());
 		SmartDashboard.putNumber("intakerotatedraw", iRotate.getOutputCurrent());
 		SmartDashboard.putNumber("elevatordraw", elev1.getOutputCurrent() + elev2.getOutputCurrent());
@@ -256,6 +267,14 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("automode", 0);
 		SmartDashboard.putBoolean("pants", false);
 
+		/**
+		 * Adds variables needed for the auto playback mode. Includes the timer and a check if we are recording,
+		 * as well as if we tried to save or play the currently stored mode.
+		 */
+		SmartDashboard.putNumber("autotimer", 20);
+		SmartDashboard.putBoolean("recording", false);
+		SmartDashboard.putBoolean("saveauto", false);
+		SmartDashboard.putBoolean("playauto", false);
 		/**
 		 * Initialize PIDControllers with 0 for P, I & D, and encoders and talons for input and output.
 		 * Each PIDController turns the wheels specified distances in auto, using encoder data as feedback.
@@ -378,7 +397,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("voltage", RobotController.getBatteryVoltage());
 		SmartDashboard.putNumber("totaldraw", PowerJNI.getVinCurrent());
 		SmartDashboard.putNumber("drivedraw", fLeft.getOutputCurrent() + bLeft.getOutputCurrent() 
-												+ fRight.getOutputCurrent() + bRight.getOutputCurrent());
+		+ fRight.getOutputCurrent() + bRight.getOutputCurrent());
 		SmartDashboard.putNumber("intakedraw", intake1.getOutputCurrent() + intake2.getOutputCurrent());
 		SmartDashboard.putNumber("intakerotatedraw", iRotate.getOutputCurrent());
 		SmartDashboard.putNumber("elevatordraw", elev1.getOutputCurrent() + elev2.getOutputCurrent());
@@ -452,7 +471,7 @@ public class Robot extends IterativeRobot {
 		bLeftPID.enable();
 		fRightPID.enable();
 		bRightPID.enable();
-
+				
 		/**
 		 * Selects auto mode based on starting position, whether PANTS is enabled, and which side the scales are on.
 		 * All of these methods are defined at the bottom of the code. They are all used repeatedly.
@@ -727,6 +746,13 @@ public class Robot extends IterativeRobot {
 			intake1.set(0.0);
 			intake2.set(0.0);
 		}
+
+		/**
+		 * P1's triggers control the elevator. 
+		 * Like always, a deadzone is added to the controls.
+		 * There is also a limit switch and a current limit that will prevent the elevator from breaking itself.
+		 * Finally, we slightly stall the motors when the elevator is inactive. This ensures it will not slip.
+		 */
 		if(driveController.getTriggerAxis(Hand.kRight) > 0.2 && upperLim.get() 
 				&& elev1.getOutputCurrent() < ELEV_CURRENT_LIMIT && elev2.getOutputCurrent() < ELEV_CURRENT_LIMIT) {
 			elev1.set(-driveController.getTriggerAxis(Hand.kRight));
@@ -741,6 +767,7 @@ public class Robot extends IterativeRobot {
 		}
 
 		/**
+		 * P1's A Button controls the elevator.
 		 * Activates climber. Can only be turned on if in the last 30 seconds of the match to prevent accidental usage.
 		 * Like with the intake motors, a current limit is placed to prevent the motors from overheating.
 		 */
@@ -810,7 +837,77 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledPeriodic() {
-
+//		/**
+//		 * Once playback button is pressed, autonomous initializes, and the stored auto is duplicated.
+//		 */
+//		if(SmartDashboard.getBoolean("playauto", false)) {
+//			SmartDashboard.putBoolean("playauto", false);
+//			robotInit();
+//			gyro.reset();
+//			fRight.setInverted(true);
+//			bRight.setInverted(true);
+//			playing.addAll(auto);
+//		}
+//		
+//		/**
+//		 * While the duplicate still has drive frames, it updates the robot and executes the next frame.
+//		 */
+//		if(!playing.isEmpty()) {
+//			robotPeriodic();
+//			DriveFrame current = playing.poll();
+//			current.execute();
+//		}
+//		
+//		if(SmartDashboard.getBoolean("saveauto", false)) {
+//			SmartDashboard.putBoolean("saveauto", false);
+//			File dir = new File("Users/Nate/FRCDashboard-master/Autos");
+//			int autoCount = dir.listFiles().length + 1;
+//			File file = new File("Users/Nate/FRCDashboard-master/Autos", "auto_" + autoCount + ".txt");
+//			try {
+//				ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+//				if(!auto.isEmpty())
+//					out.writeObject(auto);
+//				auto.clear();
+//				out.close();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		/**
+//		 * When the record button is pressed, teleop initializes, the recording is cleared, 
+//		 * and the timer begins counting.
+//		 */
+//		if(SmartDashboard.getBoolean("recording", false)) {
+//			SmartDashboard.putBoolean("recording", false);
+//			robotInit();
+//			teleopInit();
+//			auto.clear();
+//			autoTime.reset();
+//			autoTime.start();
+//		}
+//		
+//		/**
+//		 * The amount of time left in the auto is sent to the dashboard.
+//		 */
+//		double timeLeft = SmartDashboard.getNumber("autotimer", 20) - autoTime.get();
+//		SmartDashboard.putNumber("autotimer", timeLeft);
+//		
+//		/**
+//		 * After the 5 second warning is over and during the 15 second recording period, the robot is active
+//		 * and the movement of the motors is recorded.
+//		 */
+//		if(autoTime.get() >= 5 && autoTime.get() < 20) {
+//			robotPeriodic();
+//			teleopPeriodic();
+//			DriveFrame currentFrame = new DriveFrame(fLeft.get(), fRight.get(), bLeft.get(), bRight.get());
+//			auto.offer(currentFrame);
+//		}
+//		
+//		/**
+//		 * The timer is reset once the 15 second auto period has ended.
+//		 */
+//		if(autoTime.get() >= 20)
+//			autoTime.reset();
 	}
 
 	/**
@@ -825,7 +922,7 @@ public class Robot extends IterativeRobot {
 		bLeftEnc.reset();
 		fRightEnc.reset();
 		bRightEnc.reset();
-		
+
 		/**
 		 * All distances that will be used during autonomous must be added to the drivekP map. 
 		 * Here, the PID controller's P value is set the value the distance has been mapped to.
@@ -858,7 +955,7 @@ public class Robot extends IterativeRobot {
 				Thread.sleep(25);
 			}catch(InterruptedException e) {}
 		}
-		
+
 		/**
 		 * At the end, the controller is told to move towards the overall setpoint, and is given 500 ms to do so.
 		 * This is to make sure it accurately reaches the destination before moving on to the next command.
@@ -886,7 +983,7 @@ public class Robot extends IterativeRobot {
 		bLeftEnc.reset();
 		fRightEnc.reset();
 		bRightEnc.reset();
-		
+
 		/**
 		 * Unlike with auto drive, a P value is determined using an experimentally calculated quadratic regression.
 		 * The purpose is so the robot will move with more precision when given low setpoints.
@@ -937,7 +1034,7 @@ public class Robot extends IterativeRobot {
 			Timer time = new Timer();
 			time.start();
 			time.reset();
-			
+
 			/**
 			 * The elevator will continue to climb as long as the limit switch has not been hit and the timer has not
 			 * been running for 4.5 seconds or more. 
@@ -955,7 +1052,7 @@ public class Robot extends IterativeRobot {
 					elev2.set(0.0);
 				}
 			}
-			
+
 			/**
 			 * After the elevator has reached the top, it will slightly stall to prevent it from falling back down.
 			 * This stall is not enough to damage the motors, but will keep the elevator in place.
@@ -1085,5 +1182,51 @@ public class Robot extends IterativeRobot {
 		}
 		intake1.set(0.0);
 		intake2.set(0.0);
+	}
+
+	/**
+	 * 
+	 * @author Nate Tausik
+	 * Class that stores data on a single 'frame' of autonomous motion. Serializable so auto modes can be stored
+	 * in files.
+	 */
+	class DriveFrame implements Serializable {
+
+		private static final long serialVersionUID = 1L;
+		
+		double fLeftMag; 
+		double fRightMag; 
+		double bLeftMag;
+		double bRightMag;
+		double frameLength;
+
+		DriveFrame() {
+			fLeftMag = 0;
+			fRightMag = 0;
+			bLeftMag = 0;
+			bRightMag = 0;
+		}
+
+		DriveFrame(double fLeftMag, double fRightMag, double bLeftMag, double bRightMag) {
+			this.fLeftMag = fLeftMag;
+			this.fRightMag = fRightMag;
+			this.bLeftMag = bLeftMag;
+			this.bRightMag = bRightMag;
+		}
+
+		DriveFrame(double fLeftMag, double fRightMag, double bLeftMag, double bRightMag, double frameLength) {
+			this.fLeftMag = fLeftMag;
+			this.fRightMag = fRightMag;
+			this.bLeftMag = bLeftMag;
+			this.bRightMag = bRightMag;
+			this.frameLength = frameLength;
+		}
+
+		public void execute() {
+			fLeft.set(fLeftMag);
+			fRight.set(fRightMag);
+			bLeft.set(fLeftMag);
+			bRight.set(bRightMag);
+		}
 	}
 }
