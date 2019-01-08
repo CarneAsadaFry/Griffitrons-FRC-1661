@@ -641,7 +641,7 @@ public class Robot extends IterativeRobot {
 		/**
 		 * Motors that had to be inverted for auto are un-inverted.
 		 * It is worth noting that I am still unaware as to why some motors act like this.
-		 * If you can figure it out, get yourself a cookie.
+		 * If you can figure it out, I will get you a cookie.
 		 */
 		fRight.setInverted(false);
 		bRight.setInverted(false);
@@ -657,7 +657,8 @@ public class Robot extends IterativeRobot {
 		/**
 		 * Our main goal is to translate the xy coordinates from the XBox controller and turn it into polar coordinates.
 		 * rawaxis0 is left-right on the left stick, and rawaxis1 is the up-down
-		 * The distance between two points formula is used to find the magnitude of the movement.
+		 * The distance between two points formula is used to find 
+		 * the magnitude of the movement.
 		 * The movement is ignored if the magnitude is below 25% of maximum, since the sticks do not rest perfectly at 0.
 		 * At the time of writing this code, the y axis is inexplicably inverted on XBox controllers, hence the (-).
 		 */
@@ -942,9 +943,9 @@ public class Robot extends IterativeRobot {
 		 * SetpointCount is a somewhat arbitrary variable defined further up which was messed with to find a setting
 		 * that was both smooth and relatively quick. It is the number of subdivisions the setpoint becomes.
 		 * 
-		 * SIDENOTE: The total time an autonomous move will take can be found by multiplying the setpoint count
-		 * by the sleep time and then adding the 500 ms delay at the end. Convert to seconds by / 1000.
-		 * For example, each forward or backward movement should take (25 * 25 + 500) / 1000 = 1.125 seconds!
+		 * SIDENOTE: The total time an autonomous move will take can be found by multiplying the sleep time
+		 * by the setpoint count and then adding the 500 ms delay at the end. Convert to seconds by / 1000.
+		 * For example, each forward or backward movement should take (25 * 75 + 500) / 1000 = 2.375 seconds!
 		 */
 		for (int i = 1; i <= setpointCount; i++) {
 			fLeftPID.setSetpoint(((i * d) / setpointCount) * SETPOINT_TO_FEET);
