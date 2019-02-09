@@ -19,33 +19,33 @@ onkeydown = key => {
  * Function to be called when robot connects
  * @param {boolean} connected
  */
-function onRobotConnection(connected) {
-    var state = 'ROBOT STATUS: ' + (connected ? 'connected' : 'disconnected');
-    console.log(state);
-    ui.robotState.textContent = state;
-    if (connected) {
-        // On connect hide the connect popup
-        document.body.classList.toggle('login', false);
-    }
-    else {
-        // On disconnect show the connect popup
-        document.body.classList.toggle('login', true);
-        // Add Enter key handler
-        address.onkeydown = ev => {
-            if (ev.key === 'Enter') connect.click();
-        };
-        // Enable the input and the button
-        address.disabled = connect.disabled = false;
-        connect.textContent = 'Connect';
-        // Add the default address and select xxxx
-        address.value = 'roborio-1661-frc.local';
-        address.focus();
-//      address.setSelectionRange(8, 12);
-        // On click try to connect and disable the input and the button
-        connect.onclick = () => {
-            ipc.send('connect', address.value);
-            address.disabled = connect.disabled = true;
-            connect.textContent = 'Connecting...';
-        };
-    }
-}
+// function onRobotConnection(connected) {
+//     var state = 'ROBOT STATUS: ' + (connected ? 'connected' : 'disconnected');
+//     console.log(state);
+//     ui.robotState.textContent = state;
+//     if (connected) {
+//         // On connect hide the connect popup
+//         document.body.classList.toggle('login', false);
+//     }
+//     else {
+//         // On disconnect show the connect popup
+//         document.body.classList.toggle('login', true);
+//         // Add Enter key handler
+//         address.onkeydown = ev => {
+//             if (ev.key === 'Enter') connect.click();
+//         };
+//         // Enable the input and the button
+//         address.disabled = connect.disabled = false;
+//         connect.textContent = 'Connect';
+//         // Add the default address and select xxxx
+//         address.value = 'roborio-1661-frc.local';
+//         address.focus();
+// //      address.setSelectionRange(8, 12);
+//         // On click try to connect and disable the input and the button
+//         connect.onclick = () => {
+//             ipc.send('connect', address.value);
+//             address.disabled = connect.disabled = true;
+//             connect.textContent = 'Connecting...';
+//         };
+//     }
+// }

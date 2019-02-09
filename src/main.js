@@ -95,7 +95,8 @@ function createWindow() {
     // Move window to top (left) of screen.
     mainWindow.setPosition(0, 0);
     // Load window.
-    mainWindow.loadURL(`../index.html`);
+    // mainWindow.loadURL(`C:/Users/Nate/FRCDashboard-master/index.html`);
+    mainWindow.loadURL(`file://${__dirname}\\..\\index.html`);
     // Once the python server is ready, load window contents.
     mainWindow.once('ready-to-show', () => {
         console.log('main window is ready to be shown');
@@ -109,7 +110,7 @@ function createWindow() {
         console.log('main window closed');
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
+        // when youyou should delete the corresponding element.
         mainWindow = null;
         ready = false;
         client.removeListener(clientDataListener);
