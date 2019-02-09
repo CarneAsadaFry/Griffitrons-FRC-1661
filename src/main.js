@@ -95,7 +95,7 @@ function createWindow() {
     // Move window to top (left) of screen.
     mainWindow.setPosition(0, 0);
     // Load window.
-    mainWindow.loadURL(`../index.html`);
+    mainWindow.loadURL(`file://${__dirname}\\..\\index.html`);
     // Once the python server is ready, load window contents.
     mainWindow.once('ready-to-show', () => {
         console.log('main window is ready to be shown');
