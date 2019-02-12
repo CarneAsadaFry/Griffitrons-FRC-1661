@@ -8,6 +8,7 @@
     <link href="src/css/style2.css" rel="stylesheet">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+    
     <title>Dash 2019</title>
   </head>
     
@@ -16,7 +17,10 @@
     </style>
     
     
-<body>
+<body onload="onStart();">
+
+    <p id="test">change this pleasssseeeeeeeee</p>
+
     <div class="field box">
         <div class="gray-square top-square left-square"></div>
         <div class="gray-square top-square middle-square"></div>
@@ -45,8 +49,8 @@
         
     
         <img class="orientation-grid" src="orientation-grid.gif">
-        <img class="orientation-grid arrow" src="arrow.png">
-        <span class="orientation-value">360˚</span>
+        <img class="orientation-grid arrow" id="arrow" src="arrow.png">
+        <span class="orientation-value" id="orientation-value">360˚</span>
 
         
     </div>
@@ -186,69 +190,16 @@
     
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    
-  </body>
-    
-    <script>
-        
-        $(document).ready(function(){
-            
-            var pVal = 0;
-            var iVal = 0;
-            var dVal = 0;
-            
-            
-            var myVar = setInterval(myTimer, 10);
+    <div id="login">
+        <input id="connect-address" type="text" value="localhost" disabled>
+        <button id="connect" disabled>Connecting</button>
+    </div>
 
-            function myTimer() {
-                var d = new Date();
-                x = d.getSeconds()
-                y = d.getMilliseconds();
-                $('#temperature').val(x)
-                $('#temperature-val').text(x + "˚F")
-                $('.arrow').css("transform", "rotate(" + (x * 6) + "deg)");
-                $('.orientation-value').text(x * 6 + "˚")
-            }
-            
-            $('body').click(function(){
-                if (pVal != $('#p-val').val()) {
-                    $('.cp').hide();
-                }
-                if (iVal != $('#i-val').val()) {
-                    $('.ci').hide();
-                }
-                if (dVal != $('#d-val').val()) {
-                    $('.cd').hide();
-                }
-            });
-            
-            $('#pid-button').click(function(){
-                if (pVal != $('#p-val').val()) {
-                    pVal = $('#p-val').val();
-                    console.log("p: " + pVal)
-                    $('.cp').show();
-                }
-                if (iVal != $('#i-val').val()) {
-                    iVal = $('#i-val').val();
-                    console.log("i: " + iVal)
-                    $('.ci').show();
-                }
-                if (dVal != $('#d-val').val()) {
-                    dVal = $('#d-val').val();
-                    console.log("d: " + dVal)
-                    $('.cd').show();
-                }
-                
-                
-                    
-            });
-            
-            console.log(pVal)
-            
-            
-        });
     
-    </script>
+  <script src="src/networktables/networktables.js"></script>
+  <script src="src/connection.js"></script>
+  <script src="src/ui.js"></script>
+  </body>
     
     
 </html>

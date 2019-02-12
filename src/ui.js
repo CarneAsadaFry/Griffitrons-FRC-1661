@@ -1,4 +1,7 @@
 // Define UI elements
+
+
+
 let ui = {
     timer: document.getElementById('timer'),
     robotState: document.getElementById('robot-state').firstChild,
@@ -114,7 +117,23 @@ ui.encoder.reset.onclick = function() {
 };
 
 function onStart () {
-
+    // ui.robotDiagram.frDriveBar.innerHTML = 77;
+    // var x = document.getElementById('temperature-val');
+    var x = document.getElementById('temperature-val');
+    var y = document.getElementById('temperature');
+    var arrow = document.getElementById('arrow');
+   
+    // document.write(x);
+    var myVar = setInterval(myTimer, 10);
+            function myTimer() {
+                var d = new Date();
+                q = d.getSeconds()
+                p = d.getMilliseconds() / 10;
+                y.value = p;
+                x.innerHTML = p;
+                arrow.style.transform = ("rotate(" + (q * 6) + "deg)");
+            }
+    
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/flDrive', (key, value) => {
