@@ -351,6 +351,67 @@
         font-size: 1.25vw;
     }
     
+    .orientation-reset {
+        top: 12.5vw!IMPORTANT;
+        left: 12.6vw!IMPORTANT;
+    }
+
+    /* Robot Diagram */
+    .robot-diagram {
+        position: absolute;
+        height: 28vw;
+        width: auto;
+        left: .5vw;
+    }
+    .diagram-bar {
+        position: absolute;
+        left: 25.75vw;
+    }
+    .diagram-bar .bar{
+        position: absolute;
+        width: 5.5vw;
+        height: .9vw;
+    }
+    .diagram-bar .bar-value{
+        position: absolute;
+        margin-left: 6vw;
+        font-size: .75vw;
+        top: .0625vw;
+    }
+    #diagram-left-claw {
+        position: absolute;
+        top: 1.25vw;
+    }
+
+    #diagram-right-claw {
+        position: absolute;
+        top: 4vw;
+    }
+    #diagram-left-ball-intake {
+        position: absolute;
+        top: 6.8vw;
+    }
+    #diagram-right-ball-intake {
+        position: absolute;
+        top: 9.6vw;
+    }
+    #diagram-rotation {
+        position: absolute;
+        top: 12.4vw;
+    }
+    #diagram-elevator {
+        position: absolute;
+        top: 15.2vw;
+    }
+    #diagram-left-drive {
+        position: absolute;
+        top: 17.95vw;
+    }
+    #diagram-right-drive {
+        position: absolute;
+        top: 20.85vw;
+    }
+    
     /*PID*/
     .pid-form {
         display: inline-block;
@@ -469,7 +530,7 @@
         font-size: 1.5vw;
     }
     .encoder:nth-child(3) .encoder-label, .encoder:nth-child(4) .encoder-label {
-        font-size: .45vw;
+        font-size: .6vw;
         margin-top: 0.5vw;
     }
     .encoder:nth-child(3) .encoder-val, .encoder:nth-child(4) .encoder-val {
@@ -477,12 +538,28 @@
         margin-top: 0.025vw;
     }
     .encoder:nth-child(5) .encoder-label {
-        font-size: .45vw;
+        font-size: .6vw;
         margin-top: 1.75vw;
     }
     .encoder:nth-child(5) .encoder-val {
         font-size: 1.125vw;
         margin-top: .5vw;
+    }
+    .encoder-reset {
+        position: absolute;
+        width: 1vw;
+        height: 1vw;
+        font-size: .6vw;
+        top: 5.75vw!IMPORTANT;
+        left: 5vw!IMPORTANT;
+    }
+    .landscape-reset {
+        top: 1.5vw!IMPORTANT;
+        left: 6.75vw!IMPORTANT;
+    }
+    .portrait-reset {
+        top: 4.7vw!IMPORTANT;
+        left: 3.75vw!IMPORTANT;
     }
 
     /*Extra Box*/

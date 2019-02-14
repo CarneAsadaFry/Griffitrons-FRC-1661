@@ -21,119 +21,176 @@
 
     <p id="test">change this pleasssseeeeeeeee</p>
 
-    <div class="field box">
-        <div class="gray-square top-square left-square"></div>
-        <div class="gray-square top-square middle-square"></div>
-        <div class="gray-square top-square right-square"></div>
-        <div class="gray-square bottom-square left-square"></div>
-        <div class="gray-square bottom-square middle-square"></div>
-        <div class="gray-square bottom-square right-square"></div>
-        <div class="blue-line top-blue-line"></div>
-        <div class="blue-line bottom-blue-line"></div>
-        <div class="red-line top-red-line"></div>
-        <div class="red-line bottom-red-line"></div>
+    <div class="field box" id="field-box">
+
+        <!-- In this prelim. HTML: Blue is 1, Red is 2 -->
+
+        <div class="gray-square top-square left-square" id="field-top-left-square"></div>
+        <div class="gray-square top-square middle-square" id="field-top-middle-square"></div>
+        <div class="gray-square top-square right-square" id="field-top-right-square"></div>
+        <div class="gray-square bottom-square left-square" id="field-bottom-left-square"></div>
+        <div class="gray-square bottom-square middle-square" id="field-bottom-middle-square"></div>
+        <div class="gray-square bottom-square right-square" id="field-bottom-right-square"></div>
+        <div class="blue-line top-blue-line" id="field-top-line-1"></div>
+        <div class="blue-line bottom-blue-line" id="field-bottom-line-1"></div>
+        <div class="red-line top-red-line" id="field-top-line-2"></div>
+        <div class="red-line bottom-red-line" id="field-bottom-line-2"></div>
     
-        <div class="left blue rocket"></div>
-        <div class="right blue rocket"></div>
-        <div class="left red rocket"></div>
-        <div class="right red rocket"></div>
-        <div class="cargo-stations">
+        <div class="left blue rocket" id="field-left-rocket-1"></div>
+        <div class="right blue rocket" id="field-right-rocket-1"></div>
+        <div class="left red rocket" id="field-left-rocket-2"></div>
+        <div class="right red rocket" id="field-right-rocket-2"></div>
+        <div class="cargo-stations" id="cargo-stations">
         
-        <div class="red-cargo cargo"></div>
-            <div class="blue-cargo cargo"></div>
+        <div class="red-cargo cargo" id="field-cargo-1"></div>
+            <div class="blue-cargo cargo" id="field-cargo-2"></div>
         </div>
         
         
     </div>
-    <div class="orientation box">
+    <div class="orientation box" id="orientation-box">
         
     
-        <img class="orientation-grid" src="orientation-grid.gif">
+        <img class="orientation-grid" src="orientation-grid.gif" id="orientation-grid">
         <img class="orientation-grid arrow" id="arrow" src="arrow.png">
         <span class="orientation-value" id="orientation-value">360˚</span>
+        <div class="checka orientation-reset" id="reset-orientation">
+            <i class="fas fa-undo-alt"></i>
+        </div>
 
         
     </div>
-    <div class="encoders box">
+    <div class="encoders box" id="encoders-box">
         
         <div class="encoder">
-            <div class="encoder-label">Drive 1</div>
-            <div class="encoder-val">00.00</div>
+            <div class="encoder-label">Left Drive</div>
+            <div class="encoder-val" id="left-drive-encoder-value">00.00</div>
+            <div class="checka encoder-reset" id="left-drive-reset">
+                <i class="fas fa-undo-alt"></i>
+            </div>
         </div>
         <div class="encoder">
-            <div class="encoder-label">Drive 2</div>
-            <div class="encoder-val">00.00</div>
+            <div class="encoder-label">Right Drive</div>
+            <div class="encoder-val" id="right-drive-encoder-value">00.00</div>
+            <div class="checka encoder-reset" id="right-drive-reset">
+                <i class="fas fa-undo-alt"></i>
+            </div>
         </div>
         <div class="encoder">
-            <div class="encoder-label">Something</div>
-            <div class="encoder-val">00.00</div>
+            <div class="encoder-label">Intake</div>
+            <div class="encoder-val" id="intake-encoder-value">00.00</div>
+            <div class="checka encoder-reset landscape-reset" id="intake-reset">
+                <i class="fas fa-undo-alt"></i>
+            </div>
         </div>
         <div class="encoder">
-            <div class="encoder-label">Something</div>
-            <div class="encoder-val">00.00</div>
+            <div class="encoder-label">Rotation</div>
+            <div class="encoder-val" id="rotation-encoder-value">00.00</div>
+            <div class="checka encoder-reset landscape-reset" id="rotation-reset">
+                <i class="fas fa-undo-alt"></i>
+            </div>
         </div>
         <div class="encoder">
-            <div class="encoder-label">Something</div>
-            <div class="encoder-val">00.00</div>
+            <div class="encoder-label">Elevator</div>
+            <div class="encoder-val" id="elevator-encoder-value">00.00</div>
+            <div class="checka encoder-reset portrait-reset" id="elevator-reset">
+                <i class="fas fa-undo-alt"></i>
+            </div>
         </div>
         
         
     </div>
     
-    <div class="diagram box"><span style="position: absolute; top: 2vw; left: 2vw; font-size: 1.25vw;">We currently do not have a diagram of the robot...<br>but that will go here.</span></div>
-    <div class="power box">
+    <div class="diagram box">
+
+        <img class="robot-diagram" id="robot-diagram" src="robotdiagram.jpg">
+        <div class="diagram-bar">
+            <progress id="diagram-left-claw" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="diagram-left-claw-value">0.00V</span>
+        </div>
+        <div class="diagram-bar">
+            <progress id="diagram-right-claw" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="diagram-right-claw-value">0.00V</span>
+        </div>
+        <div class="diagram-bar">
+            <progress id="diagram-left-ball-intake" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="diagram-left-ball-intake-value">0.00V</span>
+        </div>
+        <div class="diagram-bar">
+            <progress id="diagram-right-ball-intake" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="diagram-right-ball-intake-value">0.00V</span>
+        </div>
+        <div class="diagram-bar">
+            <progress id="diagram-rotation" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="diagram-rotation-value">0.00V</span>
+        </div>
+        <div class="diagram-bar">
+            <progress id="diagram-elevator" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="diagram-elevator-value">0.00V</span>
+        </div>
+        <div class="diagram-bar">
+            <progress id="diagram-left-drive" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="diagram-left-drive-value">0.00V</span>
+        </div>
+        <div class="diagram-bar">
+            <progress id="diagram-right-drive" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="diagram-right-drive-value">0.00V</span>
+        </div>
+
+    </div>
+    <div class="power box" id="power-box">
         
         <div class="bar-complex large-bar">
-            <span class="bar-text">Battery Voltage</span>
-            <progress value = "80" max = "100" class="bar"></progress>
-            <span class="bar-value">0.00V</span>
+            <span class="bar-text" >Battery Voltage</span>
+            <progress id="voltage-bar" value = "80" max = "100" class="bar"></progress>
+            <span class="bar-value" id="voltage-bar-value">0.00V</span>
         </div>
         <div class="bar-complex large-bar">
             <span class="bar-text">Total Power Draw</span>
-            <progress value = "80" max = "100" class="bar"></progress>
-                        <span class="bar-value">0.00A</span>
+            <progress id="total-draw" value = "80" max = "100" class="bar"></progress>
+                        <span id="total-draw-value" class="bar-value">0.00A</span>
 
         </div>
         <div class="bar-complex small-bar">
             <span class="bar-text">Drive Train</span>
-            <progress value = "80" max = "100" class="bar"></progress>
-                        <span class="bar-value">0.00A</span>
+            <progress id="drive-train" value = "80" max = "100" class="bar"></progress>
+                        <span id="drive-train-value" class="bar-value">0.00A</span>
 
         </div>
         <div class="bar-complex small-bar">
             <span class="bar-text">Intake</span>
-            <progress value = "80" max = "100" class="bar"></progress>
-                        <span class="bar-value">0.00A</span>
+            <progress id="intake-draw" value = "80" max = "100" class="bar"></progress>
+                        <span id="intake-draw-value" class="bar-value">0.00A</span>
 
         </div>
         <div class="bar-complex small-bar">
             <span class="bar-text">Intake Pivot</span>
-            <progress value = "80" max = "100" class="bar"></progress>
-                        <span class="bar-value">0.00A</span>
+            <progress id="intake-pivot-draw" value = "80" max = "100" class="bar"></progress>
+                        <span id="intake-pivot-draw-value" class="bar-value">0.00A</span>
 
         </div>
         <div class="bar-complex small-bar">
             <span class="bar-text">Elevator</span>
-            <progress value = "80" max = "100" class="bar"></progress>
-                        <span class="bar-value">0.00A</span>
+            <progress id="elevator-draw" value = "80" max = "100" class="bar"></progress>
+                        <span id="elevator-draw-value" class="bar-value">0.00A</span>
 
         </div>
         <div class="bar-complex large-bar">
             <span class="bar-text">Velocity</span>
-            <progress value = "80" max = "100" class="bar"></progress>
-                        <span class="bar-value">0.00m/s</span>
+            <progress id="velocity" value = "80" max = "100" class="bar"></progress>
+                        <span id="velocity-value" class="bar-value">0.00m/s</span>
 
         </div>
         <div class="bar-complex large-bar">
             <span class="bar-text">Acceleration</span>
-            <progress value = "80" max = "100" class="bar"></progress>
-                        <span class="bar-value">0.00m/s²</span>
+            <progress id="acceleration" value = "80" max = "100" class="bar"></progress>
+                        <span id="acceleration-value" class="bar-value">0.00m/s²</span>
 
         </div>
         <div class="bar-complex large-bar">
             <span class="bar-text">Temperature</span>
-            <progress value = "80" max = "100" class="bar" id="temperature"></progress>
-                        <span class="bar-value" id="temperature-val">0.00˚F</span>
+            <progress id="temperature" value = "80" max = "100" class="bar" id="temperature"></progress>
+                        <span id="temperature-value" class="bar-value" id="temperature-val">0.00˚F</span>
 
         </div>
     </div>
@@ -155,7 +212,7 @@
         
     </div>
     <div class="pid box">
-    <form class="pid-form" >
+    <form class="pid-form" id="pid-general">
         <div class="pid-position">
             <input id="p-val" type="text" placeholder="P" class="pid-input">
             <div class="checka cp">
@@ -182,7 +239,8 @@
 
     </div>
     <div class="extra box">
-    <img class="pusheen" src="https://raw.githubusercontent.com/lhl/pusheen-stickers/master/gif/pusheen/144884865685780.gif">
+    <img class="pusheen" id="type-pusheen" src="pusheen.gif">
+    <img class="pusheen" id="stop-pusheen" src="stop-pusheen.gif">
     </div>
      
       
@@ -194,6 +252,13 @@
         <input id="connect-address" type="text" value="localhost" disabled>
         <button id="connect" disabled>Connecting</button>
     </div>
+
+
+    <script>
+
+
+
+    </script>
 
     
   <script src="src/networktables/networktables.js"></script>
