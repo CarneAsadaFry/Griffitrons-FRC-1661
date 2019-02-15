@@ -378,36 +378,36 @@
         font-size: .75vw;
         top: .0625vw;
     }
-    #diagram-left-claw {
+    #diagram-left-claw, #diagram-left-claw-value {
         position: absolute;
         top: 1.25vw;
     }
 
-    #diagram-right-claw {
+    #diagram-right-claw, #diagram-right-claw-value {
         position: absolute;
         top: 4vw;
     }
-    #diagram-left-ball-intake {
+    #diagram-left-ball-intake, #diagram-left-ball-intake-value {
         position: absolute;
         top: 6.8vw;
     }
-    #diagram-right-ball-intake {
+    #diagram-right-ball-intake,  #diagram-right-ball-intake-value {
         position: absolute;
         top: 9.6vw;
     }
-    #diagram-rotation {
+    #diagram-rotation, #diagram-rotation-value {
         position: absolute;
         top: 12.4vw;
     }
-    #diagram-elevator {
+    #diagram-elevator, #diagram-elevator-value {
         position: absolute;
         top: 15.2vw;
     }
-    #diagram-left-drive {
+    #diagram-left-drive, #diagram-left-drive-value {
         position: absolute;
         top: 17.95vw;
     }
-    #diagram-right-drive {
+    #diagram-right-drive, #diagram-right-drive-value {
         position: absolute;
         top: 20.85vw;
     }
