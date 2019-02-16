@@ -478,9 +478,9 @@
     .pid button:hover {
         background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
     }
-    .pid button:focus {
+    /* .pid button:focus {
         background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
-    }
+    } */
     
     /*Encoders*/
     .encoder {

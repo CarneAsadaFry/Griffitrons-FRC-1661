@@ -54,6 +54,9 @@ let ui = {
         p: document.getElementById('p-val'),
         i: document.getElementById('i-val'),
         d: document.getElementById('d-val'),
+        pCheck:document.getElementById('p-check'),
+        iCheck:document.getElementById('i-check'),
+        dCheck:document.getElementById('d-check'),
         save: document.getElementById('pid-button')
     },
     power: {
@@ -167,24 +170,10 @@ ui.encoder.elevatorEncReset.onclick = function() {
 
 function onStart () {
 
-    var value = 450;
-
-        ui.gyro.val = value;
-        ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
-        ui.gyro.visualVal %= 360;
-        if (ui.gyro.visualVal < 0) {
-            ui.gyro.visualVal += 360;
-        }
-        ui.gyro.value = ui.gyro.visualVal;
-        ui.gyro.arm.style.transform = `rotate(${ui.gyro.visualVal}deg)`;
-        ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
-
-        ui.gyro.reset.onclick = function() {
-            NetworkTables.putValue('/SmartDashboard/gyroReset', true);
-        }
 
     
-      
+
+var value = false;
     // var myVar = setInterval(myTimer, 10);
     //         function myTimer() {
     //             var d = new Date();
@@ -285,19 +274,27 @@ NetworkTables.addKeyListener('/SmartDashboard/temperature', (key, value) => {
 
 NetworkTables.addKeyListener('/SmartDashboard/p', (key, value) => {
     ui.pid.p.value = value;
-    ui.pid.save.style.background = '#A9A9A9';
+    ui.pid.save.style.background = '#415359';
+    ui.pid.pCheck.style.opacity = "0";
 });
 NetworkTables.addKeyListener('/SmartDashboard/i', (key, value) => {
     ui.pid.i.value = value;
+    ui.pid.save.style.background = '#415359';
+    ui.pid.iCheck.style.opacity = "0";
 });
 NetworkTables.addKeyListener('/SmartDashboard/d', (key, value) => {
     ui.pid.d.value = value;
+    ui.pid.save.style.background = '#415359';
+    ui.pid.dCheck.style.opacity = "0";
 });
 ui.pid.save.onclick = function() {
   NetworkTables.putValue('/SmartDashboard/p', ui.pid.p.value);
   NetworkTables.putValue('/SmartDashboard/i', ui.pid.i.value);
   NetworkTables.putValue('/SmartDashboard/d', ui.pid.d.value);
-  ui.pid.save.style.background = 'red';
+  ui.pid.save.style.background = 'linear-gradient(135deg, #f16000 0%,#ff2b51 100%)';
+  ui.pid.pCheck.style.opacity = "0";
+  ui.pid.iCheck.style.opacity = "0";
+  ui.pid.dCheck.style.opacity = "0";
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/automode', (key, value) => {
@@ -381,10 +378,6 @@ NetworkTables.addKeyListener('/SmartDashboard/isred', (key, value) => {
         ui.field.rightRocket2.classList.remove('blue');
         ui.field.leftRocket2.classList.add('swapRed');
         ui.field.rightRocket2.classList.add('swapRed');
-        ui.field.cargo1.classList.remove('red-cargo')
-        ui.field.cargo1.classList.add('swap-blue-cargo')
-        ui.field.cargo2.classList.remove('blue-cargo')
-        ui.field.cargo2.classList.add('swap-red-cargo')
     }
     else {
         ui.field.leftRocket1.classList.remove('blue');
