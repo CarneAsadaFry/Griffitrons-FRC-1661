@@ -145,44 +145,55 @@ NetworkTables.addKeyListener('/SmartDashboard/elevatorEnc', (key, value) => {
 });
 
 ui.encoder.lEncReset.onclick = function() {
-    ui.encoder.lEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/lEncReset', true);
     NetworkTables.putValue('/SmartDashboard/lEnc', 0);
 };
 ui.encoder.rEncReset.onclick = function() {
-    ui.encoder.rEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/rEncReset', true);
     NetworkTables.putValue('/SmartDashboard/rEnc', 0);
 };
 ui.encoder.intakeEncReset.onclick = function() {
-    ui.encoder.intakeEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/intakeEncReset', true);
     NetworkTables.putValue('/SmartDashboard/intakeEnc', 0);
 };
 ui.encoder.rotationEncReset.onclick = function() {
-    ui.encoder.rotationEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/rotationEncReset', true);
     NetworkTables.putValue('/SmartDashboard/rotationEnc', 0);
 };
 ui.encoder.elevatorEncReset.onclick = function() {
-    ui.encoder.elevatorEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/elevatorEncReset', true);
     NetworkTables.putValue('/SmartDashboard/elevatorEnc', 0);
 };
 
 function onStart () {
 
+    var value = 450;
+
+        ui.gyro.val = value;
+        ui.gyro.visualVal = Math.floor(ui.gyro.val - ui.gyro.offset);
+        ui.gyro.visualVal %= 360;
+        if (ui.gyro.visualVal < 0) {
+            ui.gyro.visualVal += 360;
+        }
+        ui.gyro.value = ui.gyro.visualVal;
+        ui.gyro.arm.style.transform = `rotate(${ui.gyro.visualVal}deg)`;
+        ui.gyro.number.innerHTML = ui.gyro.visualVal + 'º';
+
+        ui.gyro.reset.onclick = function() {
+            NetworkTables.putValue('/SmartDashboard/gyroReset', true);
+        }
+
     
       
-    var myVar = setInterval(myTimer, 10);
-            function myTimer() {
-                var d = new Date();
-                q = d.getSeconds()
-                p = d.getMilliseconds() / 10;
-                // y.value = p;
-                // x.innerHTML = p;
-                ui.gyro.arm.style.transform = ("rotate(" + (q * 6) + "deg)");
-            }
+    // var myVar = setInterval(myTimer, 10);
+    //         function myTimer() {
+    //             var d = new Date();
+    //             q = d.getSeconds()
+    //             p = d.getMilliseconds() / 10;
+    //             // y.value = p;
+    //             // x.innerHTML = p;
+    //             ui.gyro.arm.style.transform = ("rotate(" + (q * 6) + "deg)");
+    //         }
             
 }
 
