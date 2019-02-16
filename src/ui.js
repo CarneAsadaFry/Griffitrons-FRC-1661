@@ -60,9 +60,9 @@ let ui = {
         temperature: document.getElementById('temperature')
     },
     auto: {
-        left: document.getElementById('left-button'),
-        middle: document.getElementById('middle-button'),
-        right: document.getElementById('right-button'),
+        left: document.getElementById('field-bottom-left-square'),
+        middle: document.getElementById('field-bottom-middle-square'),
+        right: document.getElementById('field-bottom-right-square'),
     },
     jetson: {
         console: document.getElementById('console-interior'),
@@ -162,9 +162,9 @@ function onStart () {
                 p = d.getMilliseconds() / 10;
                 y.value = p;
                 x.innerHTML = p;
-                arrow.style.transform = ("rotate(" + (q * 6) + "deg)");
+                ui.gyro.arrow.style.transform = ("rotate(" + (q * 6) + "deg)");
             }
-    
+            
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/lDrive', (key, value) => {
@@ -309,7 +309,9 @@ NetworkTables.addKeyListener('/SmartDashboard/consoleOutput', (key, value) => {
     jetson.console.putValue(newString);
 });
 NetworkTables.addKeyListener('/SmartDashboard/jetsonConnected', (key, value) => {
-    ui.jetson.isConnected.classList.add('color-icon');
+    if (value) {
+        ui.jetson.isConnected.classList.add('color-icon');
+    }
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/timer', (key, value) => {
@@ -323,6 +325,27 @@ NetworkTables.addKeyListener('/SmartDashboard/timer', (key, value) => {
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/isred', (key, value) => {
+
+    if (value) {
+        ui.field.leftRocket1.classList.remove('red');
+        ui.field.rightRocket1.classList.remove('red');
+        ui.field.leftRocket1.classList.add('swapBlue');
+        ui.field.rightRocket1.classList.add('swapBlue');
+        ui.field.leftRocket2.classList.remove('blue');
+        ui.field.rightRocket2.classList.remove('blue');
+        ui.field.leftRocket2.classList.add('swapRed');
+        ui.field.rightRocket2.classList.add('swapRed');
+    }
+    else {
+        ui.field.leftRocket1.classList.remove('blue');
+        ui.field.rightRocket1.classList.remove('blue');
+        ui.field.leftRocket1.classList.add('swapRed');
+        ui.field.rightRocket1.classList.add('swapRed');
+        ui.field.leftRocket2.classList.remove('red');
+        ui.field.rightRocket2.classList.remove('red');
+        ui.field.leftRocket2.classList.add('swapBlue');
+        ui.field.rightRocket2.classList.add('swapBlue');
+    }
 
     //Replace with new field color switch
 

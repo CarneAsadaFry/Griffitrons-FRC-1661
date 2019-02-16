@@ -185,6 +185,17 @@
     }
     
     /*Field*/
+
+    .swapRed {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        top: 5.5vw;
+    }
+    .swapBlue {
+        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
+        top: 23vw;
+    }
+
+
     .rocket {
         height: 3.5vw;
         width: 2.75vw;
@@ -262,6 +273,12 @@
         width: 2.75vw;
         background-color: #21282B;
         border-radius: .2vw;
+        display: flex;
+    }
+    .square-text {
+        font-size: 1.5vw;
+        margin: auto;
+        color: #F5F7FC;
     }
     .top-square {
         top: .75vw;
