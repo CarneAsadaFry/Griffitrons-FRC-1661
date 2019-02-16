@@ -19,7 +19,14 @@
     
 <body onload="onStart();">
 
-    <p id="test">change this pleasssseeeeeeeee</p>
+    <header>
+        <div id="title"> The GRIFFITRONS </div>
+        <div id="subtitle"> FRC #1661 </div>
+        <div id="name">Name</div>
+        <div id="robot-state">ROBOT STATUS: unknown</div>
+        <div id="timer">REMAINING TIME: 0:00</div>
+    </header>
+
 
     <div class="field box" id="field-box">
 
@@ -197,20 +204,47 @@
     </div>
     <div class="modes box" id="modes-box">
     
-    <div class="btn-group" id="mode-button-group">
-        <button id="left-button">L</button>
-        <button id="middle-button">M</button>
-        <button id="right-button">R</button>
+    <div id="console-output">
+        <div id="console-interior">
+            echo "$(tput setaf 2)Wake up....."<br>
+            sleep 2s <br>
+            reset <br>
+            sleep 2s <br>
+            echo "$(tput setaf 2)Wake up....." <br>
+            sleep 2s <br>
+            reset <br>
+            echo "$(tput setaf 2)Wake up neo....." <br>
+            sleep 2s <br>
+            echo "$(tput setaf 2)The Matrix has you......" <br>
+            sleep 2s <br>
+            reset <br>
+            echo "$(tput setaf 2)Follow the white rabbit......" <br>
+            sleep 2s <br>
+            reset <br>
+            cmatrix <br>
+            echo "$(tput setaf 2)Wake up....."<br>
+            sleep 2s <br>
+            reset <br>
+            sleep 2s <br>
+            echo "$(tput setaf 2)Wake up....." <br>
+            sleep 2s <br>
+            reset <br>
+            echo "$(tput setaf 2)Wake up neo....." <br>
+            sleep 2s <br>
+            echo "$(tput setaf 2)The Matrix has you......" <br>
+            sleep 2s <br>
+            reset <br>
+            echo "$(tput setaf 2)Follow the white rabbit......" <br>
+            sleep 2s <br>
+            reset <br>
+            cmatrix <br>
+        </div>
+
     </div>
-        
-    <div class="toggle-group">
-        <div class="toggle-label">Some mode</div>
-        <label class="switch toggle-switch" id="switch">
-            <input type="checkbox" class="toggle-switch">
-            <span class="slider round"></span>
-        </label>
-    </div>
-        
+
+    <i id="light" class="fas fa-cat"></i>
+    
+    
     </div>
     <div class="pid box" id="pid-box">
     <form class="pid-form" id="pid-general">
@@ -257,6 +291,8 @@
 
     <script>
 
+    var myDiv = document.getElementById("console-output");
+    myDiv.scrollTop = myDiv.scrollHeight;
 
 
     </script>

@@ -5,7 +5,7 @@
   src: url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.eot?#iefix) format("embedded-opentype"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff2) format("woff2"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff) format("woff"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.ttf) format("truetype"), url("fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.svg#San Francisco Display Medium") format("svg")
 }
 @font-face {
-  font-family: "SF";
+  font-family: "SF-Thin";
   font-style: normal;
   font-weight: 300;
   src: url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.eot?#iefix) format("embedded-opentype"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff2) format("woff2"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff) format("woff"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.ttf) format("truetype"), url("fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.svg#San Francisco Display Thin") format("svg")
@@ -26,6 +26,50 @@
         background-color: #141A1C;
         overflow: hidden;
     }
+
+    #title {
+        position: absolute;
+        top: 1.5vw;
+        left: 2vw;
+        font-size: 3vw;
+        font-family: "SF-Bold", sans-serif;
+        font-weight: 900;
+    }
+    #subtitle {
+        position: absolute;
+        top: 4.9vw;
+        left: 2vw;
+        font-size: 1.5vw;
+        font-family: "SF", sans-serif;
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        padding: .1vw .7vw .1vw .7vw;
+        border-radius: 4vw;
+    }
+    #name {
+        position: absolute;
+        top: 1.25vw;
+        left: 43vw;
+        font-size: 4.5vw;
+        font-family: "SF-Bold", sans-serif;
+        font-weight: 900;
+    }
+    #robot-state {
+        position: absolute;
+        top: 1.25vw;
+        left: 70vw;
+        font-size: 2.25vw;
+        font-family: "SF-Bold", sans-serif;
+        font-weight: 700;
+    }
+    #timer {
+        position: absolute;
+        top: 4.25vw;
+        left: 70vw;
+        font-size: 2.25vw;
+        font-family: "SF-Bold", sans-serif;
+        font-weight: 700;
+    }
+
     .box {
         background-color: #21282B;
         border-radius: .4vw;
@@ -235,7 +279,7 @@
         left: 9.5vw;
     }
     
-    /*Modes*/
+    /* Modes
     .btn-group {
         position: absolute;
         left: 2vw;
@@ -330,7 +374,39 @@
         margin: .2vw;
         font-weight: 500;
         font-size: 1.25vw;
+    } */
+
+    #console-output {
+        background-color: #141A1C;
+        position: absolute;
+        left: 1vw;
+        top: 1vw;
+        height: 9vw;
+        width: 24vw;
+        border-radius: .4vw;
+        overflow: auto;
     }
+    #console-interior {
+        margin: 1vw;
+        font-size: .75vw;
+        font-family: monospace;
+    }
+
+    .color-icon {
+        background: -webkit-linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    #light {
+        color: #415359;
+        position: absolute; 
+
+        font-size: 3vw;
+        left: 27vw;
+        top: 4vw;
+    }
+
     
     /*Orientation*/
     .orientation-grid {

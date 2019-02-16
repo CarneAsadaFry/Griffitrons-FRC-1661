@@ -1,3 +1,5 @@
+import { isUndefined } from "util";
+
 // Define UI elements
 
 //Comment out all stuff idk what to do with.
@@ -61,6 +63,10 @@ let ui = {
         left: document.getElementById('left-button'),
         middle: document.getElementById('middle-button'),
         right: document.getElementById('right-button'),
+    },
+    jetson: {
+        console: document.getElementById('console-interior'),
+        isConnected: document.getElementById('light')
     },
     field: {
         topLeftSquare: document.getElementById('field-top-left-square'),
@@ -295,6 +301,16 @@ ui.auto.middle.onclick = function() {
 ui.auto.right.onclick = function() {
   NetworkTables.putValue('/SmartDashboard/automode', 2);
 }
+
+// Not yet sure how to format these
+NetworkTables.addKeyListener('/SmartDashboard/consoleOutput', (key, value) => {
+    var current = jetson.console.getValue;
+    var newString = current.concat(value);
+    jetson.console.putValue(newString);
+});
+NetworkTables.addKeyListener('/SmartDashboard/jetsonConnected', (key, value) => {
+    ui.jetson.isConnected.classList.add('color-icon');
+});
 
 NetworkTables.addKeyListener('/SmartDashboard/timer', (key, value) => {
     ui.timer.innerHTML = 'REMAINING TIME: ' + (value < 0 ? '0:00' : Math.floor(value / 60) + ':'
