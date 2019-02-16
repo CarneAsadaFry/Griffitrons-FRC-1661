@@ -56,7 +56,7 @@
     #robot-state {
         position: absolute;
         top: 1.25vw;
-        left: 70vw;
+        left: 67vw;
         font-size: 2.25vw;
         font-family: "SF-Bold", sans-serif;
         font-weight: 700;
@@ -64,7 +64,7 @@
     #timer {
         position: absolute;
         top: 4.25vw;
-        left: 70vw;
+        left: 67vw;
         font-size: 2.25vw;
         font-family: "SF-Bold", sans-serif;
         font-weight: 700;
@@ -455,7 +455,7 @@
         top: -0.5vw;
         left: 14.25vw;
         border-radius: 100%;
-        z-index: 10;
+        /* z-index: 10; */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -594,7 +594,8 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba(0, 0, 0, 0.8)
+        background-color: rgba(0, 0, 0, 0.8);
+        color: black;
     }
     body.login #login {
         display: flex;
@@ -606,6 +607,9 @@
         height: 40px;
     }
     #login > button {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        border: none;
+        padding: 0vw 1vw 0vw 1vw;
         margin-left: 5px;
     }
     

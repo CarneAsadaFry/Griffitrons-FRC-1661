@@ -292,9 +292,9 @@ ui.pid.save.onclick = function() {
   NetworkTables.putValue('/SmartDashboard/i', ui.pid.i.value);
   NetworkTables.putValue('/SmartDashboard/d', ui.pid.d.value);
   ui.pid.save.style.background = 'linear-gradient(135deg, #f16000 0%,#ff2b51 100%)';
-  ui.pid.pCheck.style.opacity = "0";
-  ui.pid.iCheck.style.opacity = "0";
-  ui.pid.dCheck.style.opacity = "0";
+  ui.pid.pCheck.style.opacity = "1";
+  ui.pid.iCheck.style.opacity = "1";
+  ui.pid.dCheck.style.opacity = "1";
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/automode', (key, value) => {
