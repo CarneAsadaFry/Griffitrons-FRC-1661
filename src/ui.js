@@ -1,4 +1,3 @@
-import { isUndefined } from "util";
 
 // Define UI elements
 
@@ -33,14 +32,23 @@ let ui = {
     
     },
     robotDiagram: {
-        leftClawBar: document.getElementById('diagram-left-claw-value'),
-        rightClawBar: document.getElementById('diagram-right-claw-value'),
-        leftBallBar: document.getElementById('diagram-left-ball-intake-value'),
-        rightBallBar: document.getElementById('diagram-right-ball-intake-value'),
-        rotationBar: document.getElementById('diagram-rotation-value'),
-        elevatorBar: document.getElementById('diagram-elevator-value'),
-        leftDriveBar: document.getElementById('diagram-left-drive-value'),
-        rightDriveBar: document.getElementById('diagram-right-drive-value')
+        leftClawBar: document.getElementById('diagram-left-claw'),
+        rightClawBar: document.getElementById('diagram-right-claw'),
+        leftBallBar: document.getElementById('diagram-left-ball-intake'),
+        rightBallBar: document.getElementById('diagram-right-ball-intake'),
+        rotationBar: document.getElementById('diagram-rotation'),
+        elevatorBar: document.getElementById('diagram-elevator'),
+        leftDriveBar: document.getElementById('diagram-left-drive'),
+        rightDriveBar: document.getElementById('diagram-right-drive'),
+
+        leftClawBarVal: document.getElementById('diagram-left-claw-val'),
+        rightClawBarVal: document.getElementById('diagram-right-claw-val'),
+        leftBallBarVal: document.getElementById('diagram-left-ball-intake-val'),
+        rightBallBarVal: document.getElementById('diagram-right-ball-intake-val'),
+        rotationBarVal: document.getElementById('diagram-rotation-val'),
+        elevatorBarVal: document.getElementById('diagram-elevator-val'),
+        leftDriveBarVal: document.getElementById('diagram-left-drive-val'),
+        rightDriveBarVal: document.getElementById('diagram-right-drive-val')
     },
     pid: {
         p: document.getElementById('p-val'),
@@ -57,7 +65,17 @@ let ui = {
         elevatordraw: document.getElementById('elevator-draw'),
         velocity: document.getElementById('velocity'),
         acceleration: document.getElementById('acceleration'),
-        temperature: document.getElementById('temperature')
+        temperature: document.getElementById('temperature'),
+
+        voltageVal: document.getElementById('voltage-bar-val'),
+        totaldrawVal: document.getElementById('total-draw-val'),
+        drivedrawVal: document.getElementById('drive-train-val'),
+        intakedrawVal: document.getElementById('intake-draw-val'),
+        intakerotatedrawVal: document.getElementById('intake-pivot-draw-val'),
+        elevatordrawVal: document.getElementById('elevator-draw-val'),
+        velocityVal: document.getElementById('velocity-val'),
+        accelerationVal: document.getElementById('acceleration-val'),
+        temperatureVal: document.getElementById('temperature-val')
     },
     auto: {
         left: document.getElementById('field-bottom-left-square'),
@@ -127,115 +145,129 @@ NetworkTables.addKeyListener('/SmartDashboard/elevatorEnc', (key, value) => {
 });
 
 ui.encoder.lEncReset.onclick = function() {
+    ui.encoder.lEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/lEncReset', true);
     NetworkTables.putValue('/SmartDashboard/lEnc', 0);
 };
 ui.encoder.rEncReset.onclick = function() {
+    ui.encoder.rEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/rEncReset', true);
     NetworkTables.putValue('/SmartDashboard/rEnc', 0);
 };
 ui.encoder.intakeEncReset.onclick = function() {
+    ui.encoder.intakeEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/intakeEncReset', true);
     NetworkTables.putValue('/SmartDashboard/intakeEnc', 0);
 };
 ui.encoder.rotationEncReset.onclick = function() {
+    ui.encoder.rotationEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/rotationEncReset', true);
     NetworkTables.putValue('/SmartDashboard/rotationEnc', 0);
 };
 ui.encoder.elevatorEncReset.onclick = function() {
+    ui.encoder.elevatorEnc.innerHTML = 0;
     NetworkTables.putValue('/SmartDashboard/elevatorEncReset', true);
     NetworkTables.putValue('/SmartDashboard/elevatorEnc', 0);
 };
 
 function onStart () {
-    // ui.robotDiagram.frDriveBar.innerHTML = 77;
-    // var x = document.getElementById('temperature-val');
-    var x = document.getElementById('temperature-val');
-    var y = document.getElementById('temperature');
-    var arrow = document.getElementById('arrow');
-   
-    // document.write(x);
+
+    
+      
     var myVar = setInterval(myTimer, 10);
             function myTimer() {
                 var d = new Date();
                 q = d.getSeconds()
                 p = d.getMilliseconds() / 10;
-                y.value = p;
-                x.innerHTML = p;
-                ui.gyro.arrow.style.transform = ("rotate(" + (q * 6) + "deg)");
+                // y.value = p;
+                // x.innerHTML = p;
+                ui.gyro.arm.style.transform = ("rotate(" + (q * 6) + "deg)");
             }
             
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/lDrive', (key, value) => {
     let num = Math.floor((value + 100) / 2);
-    ui.robotDiagram.leftDriveBar.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
-    ui.robotDiagram.leftDriveBar.value = num;
+    ui.robotDiagram.leftDriveBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.leftDriveBar.value = 1 + (Math.floor(value * 100) / 100);
 });
 NetworkTables.addKeyListener('/SmartDashboard/rDrive', (key, value) => {
     let num = Math.floor((value + 100) / 2);
-    ui.robotDiagram.rightDriveBar.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
-    ui.robotDiagram.rightDriveBar.value = num;
+    ui.robotDiagram.rightDriveBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.rightDriveBar.value = 1 + (Math.floor(value * 100) / 100);
 });
-NetworkTables.addKeyListener('/SmartDashboard/intake', (key, value) => {
+NetworkTables.addKeyListener('/SmartDashboard/leftClawIntake', (key, value) => {
     let num = Math.floor((value + 100) / 2);
-    ui.robotDiagram.intakeBar.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
-    ui.robotDiagram.intakeBar.value = num;
+    ui.robotDiagram.leftClawBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.leftClawBar.value = 1 + (Math.floor(value * 100) / 100);
+});
+NetworkTables.addKeyListener('/SmartDashboard/rightClawIntake', (key, value) => {
+    let num = Math.floor((value + 100) / 2);
+    ui.robotDiagram.rightClawBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.rightClawBar.value = 1 + (Math.floor(value * 100) / 100);
+});
+NetworkTables.addKeyListener('/SmartDashboard/rightBallIntake', (key, value) => {
+    let num = Math.floor((value + 100) / 2);
+    ui.robotDiagram.rightBallBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.rightBallBar.value = 1 + (Math.floor(value * 100) / 100);
+});
+NetworkTables.addKeyListener('/SmartDashboard/leftBallIntake', (key, value) => {
+    let num = Math.floor((value + 100) / 2);
+    ui.robotDiagram.leftBallBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.leftBallBar.value = 1 + (Math.floor(value * 100) / 100);
+});
+NetworkTables.addKeyListener('/SmartDashboard/rightBallIntake', (key, value) => {
+    let num = Math.floor((value + 100) / 2);
+    ui.robotDiagram.rightBallBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.rightBallBar.value = 1 + (Math.floor(value * 100) / 100);
 });
 NetworkTables.addKeyListener('/SmartDashboard/intakerotate', (key, value) => {
     let num = Math.floor((value + 100) / 2);
-    ui.robotDiagram.intakerotateBar.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
-    ui.robotDiagram.intakerotateBar.value = num;
+    ui.robotDiagram.rotationBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.rotationBar.value = 1 + (Math.floor(value * 100) / 100);
 });
 NetworkTables.addKeyListener('/SmartDashboard/elevator', (key, value) => {
     let num = Math.floor((value + 100) / 2);
-    ui.robotDiagram.elevatorBar.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
-    ui.robotDiagram.elevatorBar.value = num;
+    ui.robotDiagram.elevatorBarVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.robotDiagram.elevatorBar.value = 1 + (Math.floor(value * 100) / 100);
 });
 
+
 NetworkTables.addKeyListener('/SmartDashboard/voltage', (key, value) => {
-    ui.power.voltage.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + 'V';
-    let percent = value / 13 * 100;
-    ui.power.voltage.value = percent;
+    ui.power.voltageVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.power.voltage.value = value;
 });
 NetworkTables.addKeyListener('/SmartDashboard/totaldraw', (key, value) => {
-    ui.power.totaldraw.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + 'A';
-    let percent = value / 1037 * 100;
-    ui.power.totaldraw.value = percent;
+    ui.power.totaldrawVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.power.totaldraw.value = value;
 });
 NetworkTables.addKeyListener('/SmartDashboard/drivedraw', (key, value) => {
-    ui.power.drivedraw.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + 'A';
-    let percent = value / 532 * 100;
-    ui.power.drivedraw.value = percent;
+    ui.power.drivedrawVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.power.drivedraw.value = value;
 });
 NetworkTables.addKeyListener('/SmartDashboard/intakedraw', (key, value) => {
-    ui.power.intakedraw.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + 'A';
-    let percent = value / 106 * 100;
-    ui.power.intakedraw.value = percent;
+    ui.power.intakedrawVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.power.intakedraw.value = value;
 });
 NetworkTables.addKeyListener('/SmartDashboard/intakerotatedraw', (key, value) => {
-    ui.power.intakerotatedraw.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + 'A';
-    let percent = value / 133 * 100;
-    ui.power.intakerotatedraw.value = percent;
+    ui.power.intakerotatedrawVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.power.intakerotatedraw.value = value;
 });
 NetworkTables.addKeyListener('/SmartDashboard/elevatordraw', (key, value) => {
-    ui.power.elevatordraw.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + 'A';
-    let percent = value / 266 * 100;
-    ui.power.elevatordraw.value = percent;
+    ui.power.elevatordrawVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.power.elevatordraw.value = value;
 });
 NetworkTables.addKeyListener('/SmartDashboard/velocity', (key, value) => {
-    ui.power.velocity.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + ' m/s';
-    let percent = value / 50 * 100;
-    ui.power.velocity.value = percent;
+    ui.power.velocityVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.power.velocity.value = value;
 });
 NetworkTables.addKeyListener('/SmartDashboard/acceleration', (key, value) => {
-    ui.power.acceleration.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + ' m/s' + '2'.sup();
-    let percent = value / 50 * 100;
-    ui.power.acceleration.value = percent;
+    ui.power.accelerationVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
+    ui.power.acceleration.value = value;
 });
 NetworkTables.addKeyListener('/SmartDashboard/temperature', (key, value) => {
     value = value * 9 / 5 + 32;
-    ui.power.temperature.innerHTML = (Math.floor(value * 100) / 100).toFixed(2) + 'ºF';
+    ui.power.temperatureVal.innerHTML = (Math.floor(value * 100) / 100).toFixed(2);
     let percent = value / 120 * 100;
     ui.power.temperature.value = percent;
 });
@@ -312,6 +344,9 @@ NetworkTables.addKeyListener('/SmartDashboard/jetsonConnected', (key, value) => 
     if (value) {
         ui.jetson.isConnected.classList.add('color-icon');
     }
+    else {
+        ui.jetson.isConnected.classList.remove('color-icon');
+    }
 });
 
 NetworkTables.addKeyListener('/SmartDashboard/timer', (key, value) => {
@@ -335,6 +370,10 @@ NetworkTables.addKeyListener('/SmartDashboard/isred', (key, value) => {
         ui.field.rightRocket2.classList.remove('blue');
         ui.field.leftRocket2.classList.add('swapRed');
         ui.field.rightRocket2.classList.add('swapRed');
+        ui.field.cargo1.classList.remove('red-cargo')
+        ui.field.cargo1.classList.add('swap-blue-cargo')
+        ui.field.cargo2.classList.remove('blue-cargo')
+        ui.field.cargo2.classList.add('swap-red-cargo')
     }
     else {
         ui.field.leftRocket1.classList.remove('blue');
@@ -345,8 +384,11 @@ NetworkTables.addKeyListener('/SmartDashboard/isred', (key, value) => {
         ui.field.rightRocket2.classList.remove('red');
         ui.field.leftRocket2.classList.add('swapBlue');
         ui.field.rightRocket2.classList.add('swapBlue');
+        ui.field.cargo1.classList.remove('blue-cargo')
+        ui.field.cargo1.classList.add('swap-red-cargo')
+        ui.field.cargo2.classList.remove('red-cargo')
+        ui.field.cargo2.classList.add('swap-blue-cargo')
     }
-
     //Replace with new field color switch
 
     // if(value) {
