@@ -173,22 +173,7 @@ ui.encoder.elevatorEncReset.onclick = function() {
 };
 
 function onStart () {
-
-
-    
-
-    
-
-    // var myVar = setInterval(myTimer, 10);
-    //         function myTimer() {
-    //             var d = new Date();
-    //             q = d.getSeconds()
-    //             p = d.getMilliseconds() / 10;
-    //             // y.value = p;
-    //             // x.innerHTML = p;
-    //             ui.gyro.arm.style.transform = ("rotate(" + (q * 6) + "deg)");
-    //         }
-            
+                
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/lDrive', (key, value) => {
