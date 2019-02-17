@@ -1,9 +1,6 @@
 
 // Define UI elements
 
-//Comment out all stuff idk what to do with.
-
-
 
 let ui = {
     timer: document.getElementById('timer'),
@@ -173,7 +170,7 @@ ui.encoder.elevatorEncReset.onclick = function() {
 };
 
 function onStart () {
-                
+
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/lDrive', (key, value) => {
