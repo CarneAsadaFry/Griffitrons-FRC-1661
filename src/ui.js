@@ -170,7 +170,7 @@ ui.encoder.elevatorEncReset.onclick = function() {
 };
 
 function onStart () {
-
+    
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/lDrive', (key, value) => {
@@ -357,14 +357,14 @@ NetworkTables.addKeyListener('/SmartDashboard/timer', (key, value) => {
 NetworkTables.addKeyListener('/SmartDashboard/isred', (key, value) => {
 
     if (value) {
-        ui.field.leftRocket1.classList.remove('red');
-        ui.field.rightRocket1.classList.remove('red');
-        ui.field.leftRocket1.classList.add('swapBlue');
-        ui.field.rightRocket1.classList.add('swapBlue');
-        ui.field.leftRocket2.classList.remove('blue');
-        ui.field.rightRocket2.classList.remove('blue');
-        ui.field.leftRocket2.classList.add('swapRed');
-        ui.field.rightRocket2.classList.add('swapRed');
+        ui.field.leftRocket1.classList.remove('color-red');
+        ui.field.rightRocket1.classList.remove('color-red');
+        ui.field.leftRocket1.classList.add('color-blue');
+        ui.field.rightRocket1.classList.add('color-blue');
+        ui.field.leftRocket2.classList.remove('color-blue');
+        ui.field.rightRocket2.classList.remove('color-blue');
+        ui.field.leftRocket2.classList.add('color-red');
+        ui.field.rightRocket2.classList.add('color-red');
         ui.field.topLine1.classList.remove('red-line');
         ui.field.topLine1.classList.add('blue-line');
         ui.field.bottomLine1.classList.remove('red-line');
@@ -376,18 +376,18 @@ NetworkTables.addKeyListener('/SmartDashboard/isred', (key, value) => {
         
     }
     else {
-        ui.field.leftRocket1.classList.remove('blue');
-        ui.field.rightRocket1.classList.remove('blue');
-        ui.field.leftRocket1.classList.add('swapRed');
-        ui.field.rightRocket1.classList.add('swapRed');
-        ui.field.leftRocket2.classList.remove('red');
-        ui.field.rightRocket2.classList.remove('red');
+        ui.field.leftRocket1.classList.remove('color-blue');
+        ui.field.rightRocket1.classList.remove('color-blue');
+        ui.field.leftRocket1.classList.add('color-red');
+        ui.field.rightRocket1.classList.add('color-red');
+        ui.field.leftRocket2.classList.remove('color-red');
+        ui.field.rightRocket2.classList.remove('color-red');
         ui.field.leftRocket2.classList.add('swapBlue');
         ui.field.rightRocket2.classList.add('swapBlue');
-        ui.field.cargo1.classList.remove('blue-cargo')
-        ui.field.cargo1.classList.add('swap-red-cargo')
-        ui.field.cargo2.classList.remove('red-cargo')
-        ui.field.cargo2.classList.add('swap-blue-cargo')
+        ui.field.cargo1.classList.remove('blue-cargo');
+        ui.field.cargo1.classList.add('swap-red-cargo');
+        ui.field.cargo2.classList.remove('red-cargo');
+        ui.field.cargo2.classList.add('swap-blue-cargo');
         ui.field.topLine1.classList.remove('blue-line');
         ui.field.topLine1.classList.add('red-line');
         ui.field.bottomLine1.classList.remove('blue-line');
