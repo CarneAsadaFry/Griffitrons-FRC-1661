@@ -1,807 +1,626 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-::-webkit-scrollbar {
-    display: none;
-}
-body {
-    font: 16px sans-serif;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    color: white;
-    overflow: hidden;
-    background: #A9A9A9;
-}
-button, input[type="text"], input[type="number"], .select-container, select {
-    color: white;
-    background: #444;
-    border: none;
-    font-size: 14px;
-    padding: 6px 8px;
-    cursor: pointer;
-    outline: 0;
-}
-.select-container {
-    padding: 0;
-    display: inline-block;
-}
-select {
-    border: none;
-    background: none;
-    color: white;
-    height: 25px;
-}
-input[type="text"], input[type="number"] {
-    cursor: text;
-}
-input[type="checkbox"] {
-    -webkit-filter: saturate(0);
-    filter: saturate(0);
-}
-/* Major interface panes, aside, article, header, etc. */
-body > * {
-    padding: 10px;
-    position: fixed;
-    overflow: scroll;
-    background: #222;
-}
-header {
-    width: 2000px;
-    height: 123px;
-    top: 0;
-    left: 0;
-    color: white;
-    background: #222;
-}
-label {
-    font-size: 14px;
-    font-family: "OCR A";
-    position: absolute;
-    bottom: 4px;
-    right: 4px;
-}
-#title {
-    position: absolute;
-    top: 15px;
-    left: 40px;
-    font-size: 40px;
-    font-family: "Impact";
-}
-#subtitle {
-    position: absolute;
-    top: 65px;
-    left: 40px;
-    font-size: 28px;
-    /*font-family: "Impact";*/
-}
-#logo {
-    position: absolute;
-    top: 0px;
-    left: 340px;
-}
-#name {
-    font-family: "Brush Script MT";
-    font-size: 90px;
-    position: absolute;
-    top: -15px;
-    left: 540px;
-}
-#robot-state {
-    position: absolute;
-    font-size: 30px;
-    font-family: "OCR A";
-    top: 15px;
-    left: 780px;
-}
-#timer {
-    color: white;
-    height: 20vh;
-    width: 30vw;
-    top: 50px;
-    left: 780px;
-    font-size: 28px;
-    font-family: "OCR A";
-    position: absolute;
-}
-#camera {
-    padding: 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 50vw;
-    height: 80vh;
-    overflow: hidden;
-    background-color: #333;
-    /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
-    /*background-image: url('LINK TO CAMERA SOURCE HERE');*/
-}
-#field {
-    position: fixed;
-    top: 127px;
-    left: 4px;
-    width: 220px;
-    height: 440px;
-    background: #222;
-}
-#fieldimg {
-    position: absolute;
-    top: 20px;
-    left: 5px;
-}
-#leftimg {
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    opacity: 0;
-}
-#leftpantsimg {
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    opacity: 0;
-}
-#middleimg {
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    opacity: 0;
-}
-#middlepantsimg {
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    opacity: 0;
-}
-#rightimg {
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    opacity: 0;
-}
-#rightpantsimg {
-    position: absolute;
-    top: 20px;
-    left: 5px;
-    opacity: 0;
-}
-#scale3left {
-    position: absolute;
-    top: 120px;
-    left: 63px;
-    width: 47px;
-    height: 33px;
-    background-color: red;
-    border: 1px solid black;
-}
-#scale3right {
-    position: absolute;
-    top: 120px;
-    left: 110px;
-    width: 47px;
-    height: 33px;
-    background-color: blue;
-    border: 1px solid black;
-}
-#scale2left {
-  position: absolute;
-  top: 214px;
-  left: 51px;
-  width: 59px;
-  height: 33px;
-  background-color: red;
-  border: 1px solid black;
-}
-#scale2right {
-  position: absolute;
-  top: 214px;
-  left: 110px;
-  width: 59px;
-  height: 33px;
-  background-color: blue;
-  border: 1px solid black;
-}
-#scale1left {
-  position: absolute;
-  top: 307px;
-  left: 63px;
-  width: 47px;
-  height: 33px;
-  background-color: red;
-  border: 1px solid black;
-}
-#scale1right {
-  position: absolute;
-  top: 307px;
-  left: 110px;
-  width: 47px;
-  height: 33px;
-  background-color: blue;
-  border: 1px solid black;
-}
-#teamcolor {
-  position: absolute;
-  top: 246px;
-  left: 72px;
-  width: 77px;
-  height: 22px;
-  background-color: red;
-  border: 1px solid black;
-}
-#opponentcolor {
-  position: absolute;
-  top: 192px;
-  left: 72px;
-  width: 77px;
-  height: 23px;
-  background-color: blue;
-  border: 1px solid black;
-}
-#leftcircle {
-  position: absolute;
-  bottom: 10px;
-  left: 37px;
-  background-color: #222;
-  height: 20px;
-  width: 20px;
-  -webkit-border-radius:75px;
-  -moz-border-radius:75px;
-}
-#middlecircle {
-  position: absolute;
-  bottom: 10px;
-  left: 100px;
-  background-color: #222;
-  height: 20px;
-  width: 20px;
-  -webkit-border-radius:75px;
-  -moz-border-radius:75px;
-}
-#rightcircle {
-  position: absolute;
-  bottom: 10px;
-  left: 164px;
-  background-color: #222;
-  height: 20px;
-  width: 20px;
-  -webkit-border-radius:75px;
-  -moz-border-radius:75px;
-}
-#fieldlabel {
-    font-size: 14px;
-    font-family: "OCR A";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-}
-#gyro {
-    position: fixed;
-    top: 127px;
-    left: 228px;
-    width: 220px;
-    height: 218px;
-    background: #222;
-}
-#gyroimg {
-  position: absolute;
-  top: 10px;
-  left: 20px;
-}
-#gyronum {
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  font-family: "OCR A";
-  font-size: 26px;
-}
-#gyroreset {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  font-family: "OCR A";
-  font-size: 16px;
-  background: #A9A9A9;
-}
-#arrowimg {
-  position: absolute;
-  transform-origin: 50% 95%;
-  top: 14.3px;
-  left: 105.5px;
-}
-#encoder {
-    position: fixed;
-    top: 349px;
-    left: 228px;
-    width: 220px;
-    height: 218px;
-    background: #222;
-}
-#flcircle {
-  position: absolute;
-  top: 10px;
-  left: 15px;
-  background-color: rgba(204, 0, 102, 0);
-  border: 3px solid red;
-  height:90px;
-  width:90px;
-  -webkit-border-radius:75px;
-  -moz-border-radius:75px;
-}
-#flencval {
-  font-family: "OCR A";
-  font-size: 28px;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
-}
-#frcircle {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background-color: rgba(204, 0, 102, 0);
-  border: 3px solid red;
-  height:90px;
-  width:90px;
-  -webkit-border-radius:75px;
-  -moz-border-radius:75px;
-}
-#frencval {
-  font-family: "OCR A";
-  font-size: 28px;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
-}
-#blcircle {
-  position: absolute;
-  bottom: 20px;
-  left: 15px;
-  background-color: rgba(204, 0, 102, 0);
-  border: 3px solid red;
-  height:90px;
-  width:90px;
-  -webkit-border-radius:75px;
-  -moz-border-radius:75px;
-}
-#blencval {
-  font-family: "OCR A";
-  font-size: 28px;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
-}
-#brcircle {
-  position: absolute;
-  bottom: 20px;
-  right: 15px;
-  background-color: rgba(204, 0, 102, 0);
-  border: 3px solid red;
-  height:90px;
-  width:90px;
-  -webkit-border-radius:75px;
-  -moz-border-radius:75px;
-}
-#brencval {
-  font-family: "OCR A";
-  font-size: 28px;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%)
-}
-#encreset {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  font-family: "OCR A";
-  font-size: 16px;
-  background: #A9A9A9;
-}
-#auto {
-    font-family: "OCR A";
-    font-size: 18px;
-    position: fixed;
-    top: 571px;
-    left: 4px;
-    width: 444px;
-    height: 68px;
-    background: #222;
-}
-#autolabel {
-  font-size: 14px;
-  font-family: "OCR A";
-  position: absolute;
-  bottom: 4px;
-  left: 4px;
-}
-#autoleft {
-    position: absolute;
-    top: 20px;
-    left: 10px;
-    font-size: 28px;
-    background: red;
-}
-#automiddle {
-    position: absolute;
-    top: 20px;
-    left: 86px;
-    font-size: 28px;
-    background: #A9A9A9;
-}
-#autoright {
-    position: absolute;
-    top: 20px;
-    left: 195px;
-    font-size: 28px;
-    background: #A9A9A9;
-}
-#pants {
-    font-size: 22px;
-    position: absolute;
-    top: 10px;
-    left: 310px;
-}
-#pantson {
-    font-size: 26px;
-    position: absolute;
-    top: 24px;
-    left: 49px;
-    background-color: #A9A9A9;
-    width: 35px;
-}
-#pantsoff {
-    font-size: 26px;
-    position: absolute;
-    top: 24px;
-    left: 84px;
-    background-color: red;
-    width: 44px;
-}
-#robot {
-    position: fixed;
-    top: 127px;
-    left: 452px;
-    width: 500px;
-    height: 350px;
-    background: #222;
-}
-#robotimg {
-    position: absolute;
-    top: 15px;
-    left: 5px;
-}
-#fldrivebar {
-    font-family: "OCR A";
-    position: absolute;
-    text-align: center;
-    top: 14px;
-    left: 315px;
-    width: 100px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 50%,
-      #A9A9A9 50%,
-      #A9A9A9 100%
-  );
-}
-#frdrivebar {
-  font-family: "OCR A";
-  position: absolute;
-  text-align: center;
-  top: 43px;
-  left: 315px;
-  width: 100px;
-  background: linear-gradient(
-    to right,
-    red 0%,
-    red 50%,
-    #A9A9A9 50%,
-    #A9A9A9 100%
-);
-}
-#bldrivebar {
-  font-family: "OCR A";
-  position: absolute;
-  text-align: center;
-  top: 72px;
-  left: 315px;
-  width: 100px;
-  background: linear-gradient(
-    to right,
-    red 0%,
-    red 50%,
-    #A9A9A9 50%,
-    #A9A9A9 100%
-);
-}
-#brdrivebar {
-  font-family: "OCR A";
-  position: absolute;
-  text-align: center;
-  top: 101px;
-  left: 315px;
-  width: 100px;
-  background: linear-gradient(
-    to right,
-    red 0%,
-    red 50%,
-    #A9A9A9 50%,
-    #A9A9A9 100%
-);
-}
-#intakebar {
-  font-family: "OCR A";
-  position: absolute;
-  text-align: center;
-  top: 130px;
-  left: 315px;
-  width: 100px;
-  background: linear-gradient(
-    to right,
-    red 0%,
-    red 50%,
-    #A9A9A9 50%,
-    #A9A9A9 100%
-);
-}
-#intakerotatebar {
-  font-family: "OCR A";
-  position: absolute;
-  text-align: center;
-  top: 159px;
-  left: 315px;
-  width: 100px;
-  background: linear-gradient(
-    to right,
-    red 0%,
-    red 50%,
-    #A9A9A9 50%,
-    #A9A9A9 100%
-);
-}
-#elevatorbar {
-  font-family: "OCR A";
-  position: absolute;
-  text-align: center;
-  top: 188px;
-  left: 315px;
-  width: 100px;
-  background: linear-gradient(
-    to right,
-    red 0%,
-    red 50%,
-    #A9A9A9 50%,
-    #A9A9A9 100%
-);
-}
-#pid {
-    font-family: "OCR A";
-    position: fixed;
-    top: 481px;
-    left: 452px;
-    width: 370px;
-    height: 158px;
-    background: #222;
-}
-#pfield {
-    position: relative;
-    left: 2px;
-    font-family: "OCR A";
-    font-size: 32;
-    background-color: #A9A9A9;
-}
-#ifield {
-    position: relative;
-    left: 2px;
-    font-family: "OCR A";
-    font-size: 32;
-    background-color: #A9A9A9;
-}
-#dfield {
-    position: relative;
-    left: 2px;
-    font-family: "OCR A";
-    font-size: 32;
-    background-color: #A9A9A9;
-}
-#save {
-    position: absolute;
-    left: 250px;
-    top: 58px;
-    font-family: "OCR A";
-    font-size: 32;
-    background-color: #A9A9A9;
-}
-#power {
-    font-family: "OCR A";
-    position: fixed;
-    top: 127px;
-    left: 956px;
-    width: 305px;
-    height: 350px;
-    background: #222;
-}
-#voltagebar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 250px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#totaldrawbar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 250px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#powerdraw {
-    position: absolute;
-    font-size: 14px;
-    left: 60px;
-}
-#drivedrawbar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 200px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#intakedrawbar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 200px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#intakerotatedrawbar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 200px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#elevatordrawbar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 200px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#memevalues {
-    position: absolute;
-    top: 225px;
-}
-#velocitybar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 250px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#accelerationbar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 250px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#temperaturebar {
-    font-family: "OCR A";
-    text-align: center;
-    width: 250px;
-    background: linear-gradient(
-      to right,
-      red 0%,
-      red 0%,
-      #A9A9A9 0%,
-      #A9A9A9 100%
-  );
-}
-#led {
-    position: fixed;
-    top: 481px;
-    left: 826px;
-    width: 435px;
-    height: 158px;
-    background: #222;
-}
-svg * {
-    stroke: white;
-    fill: #222;
-    stroke-width: 2;
-    -webkit-transform-origin: center;
-    -ms-transform-origin: center;
-    transform-origin: center;
-}
-text {
-    font-size: 16px;
-    letter-spacing: 2px;
-    stroke: none;
-    fill: white;
-}
-#team {
-    font-size: 28px;
-    letter-spacing: -1px;
-}
-#login {
-    position: fixed;
-    display: none;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8)
-}
-body.login #login {
-    display: flex;
-}
-#login :disabled {
-    opacity: 0.6;
-}
-#login > * {
-    height: 40px;
-}
-#login > button {
-    margin-left: 5px;
-}
+@font-face {
+  font-family: "SF";
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.eot?#iefix) format("embedded-opentype"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff2) format("woff2"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff) format("woff"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.ttf) format("truetype"), url("fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.svg#San Francisco Display Medium") format("svg")
+}
+@font-face {
+  font-family: "SF-Thin";
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.eot?#iefix) format("embedded-opentype"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff2) format("woff2"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff) format("woff"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.ttf) format("truetype"), url("fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.svg#San Francisco Display Thin") format("svg")
+}
+@font-face {
+  font-family: "SF-Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.eot?#iefix) format("embedded-opentype"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff2) format("woff2"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff) format("woff"), url(https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.ttf) format("truetype"), url("fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.svg#San Francisco Display Bold") format("svg")
+}
+
+    
+     * {
+        font-family: "SF", sans-serif;
+        color: #F5F7FC;
+        }
+    body {
+        background-color: #141A1C;
+        overflow: hidden;
+    }
+
+    #title {
+        position: absolute;
+        top: 1.5vw;
+        left: 2vw;
+        font-size: 3vw;
+        font-family: "SF-Bold", sans-serif;
+        font-weight: 900;
+    }
+    #subtitle {
+        position: absolute;
+        top: 4.9vw;
+        left: 2vw;
+        font-size: 1.5vw;
+        font-family: "SF", sans-serif;
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        padding: .1vw .7vw .1vw .7vw;
+        border-radius: 4vw;
+    }
+    #name {
+        position: absolute;
+        top: 1.25vw;
+        left: 43vw;
+        font-size: 4.5vw;
+        font-family: "SF-Bold", sans-serif;
+        font-weight: 900;
+    }
+    #robot-state {
+        position: absolute;
+        top: 1.25vw;
+        left: 67vw;
+        font-size: 2.25vw;
+        font-family: "SF-Bold", sans-serif;
+        font-weight: 700;
+    }
+    #timer {
+        position: absolute;
+        top: 4.25vw;
+        left: 67vw;
+        font-size: 2.25vw;
+        font-family: "SF-Bold", sans-serif;
+        font-weight: 700;
+    }
+
+    .box {
+        background-color: #21282B;
+        border-radius: .4vw;
+    }
+    .field {
+        position: absolute;
+        background-color: #415359;
+        left: 2vw;
+        top: 8vw;
+        height: 32vw;
+        width: 15vw;
+    }
+    .orientation {
+        position: absolute;
+        left: 19vw;
+        top: 8vw;
+        height: 15vw;
+        width: 15vw;
+    }
+    .encoders {
+        position: absolute;
+        left: 19vw;
+        top: 25vw;
+        height: 15vw;
+        width: 15vw;
+    }
+    .diagram {
+        position: absolute;
+        left: 36vw;
+        top: 8vw;
+        height: 28vw;
+        width: 35vw;
+    }
+    .power {
+        position: absolute;
+        left: 73vw;
+        top: 8vw;
+        height: 28vw;
+        width: 25vw;
+    }
+    .modes {
+        position: absolute;
+        left: 2vw;
+        top: 42vw;
+        height: 11vw;
+        width: 32vw;
+    }
+    .pid {
+        position: absolute;
+        left: 36vw;
+        top: 38vw;
+        height: 15vw;
+        width: 28vw;
+    }
+    .extra {
+        position: absolute;
+        left: 66vw;
+        top: 38vw;
+        height: 15vw;
+        width: 32vw;
+    }
+    
+    /*Power*/
+    .bar-complex {
+        margin: .5vw 1vw -.125vw 2vw;
+    }
+    .bar-complex:first-child {
+        margin: 1vw 1vw -.125vw 2vw; 
+    }
+    .bar-text {
+        display: block;
+        margin: .125vw;
+    }
+    progress {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: .0625vw;
+        }
+    progress::-webkit-progress-bar {
+        background-color: #415359; width: 100%;
+        border-radius: 1.2vw;
+    }
+    progress::-webkit-progress-value {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        border-radius: 1.2vw;
+        box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75);
+    }
+    .large-bar progress {
+        width: 16.5vw;
+        height: 1.25vw;
+    }
+    .large-bar {
+        font-size: 1vw;
+    }
+     .large-bar .bar-value {
+        font-size: 1vw;
+    }
+    .small-bar progress {
+        width: 14vw;
+        height: 1vw;
+    }
+    .small-bar {
+        margin-left: 4.5vw;
+        font-size: .875vw;
+    }
+    .bar-value {
+        display: inline;
+        margin-left: .25vw;
+        font-size: 1vw;
+    }
+    .small-bar .bar-value {
+        font-size: .875vw;
+    }
+    
+    /*Field*/
+
+    .swapRed {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        top: 5.5vw;
+    }
+    .swapBlue {
+        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
+        top: 23vw;
+    }
+
+
+    .rocket {
+        height: 3.5vw;
+        width: 2.75vw;
+        border-radius: 0.4vw;
+        box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75);
+        position: absolute;
+    }
+    .cargo {
+        height: 6vw;
+        width: 3vw;
+        position: absolute;
+        left: 6vw;
+    }
+    .blue {
+        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
+        top: 5.5vw;
+    }
+    .red {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        top: 23vw;
+    }
+    .left {
+        transform: perspective(2.25vw) rotatey(35deg);
+        left: .5vw;
+    }
+    .right {
+        transform: perspective(2.25vw) rotatey(325deg);
+        left: 11.75vw;
+    }
+    .blue-cargo {
+        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
+        top: 10vw;
+        border-radius: 0.4vw 0.4vw 0vw 0vw ;
+        box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75) 
+    }
+    .red-cargo {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        top: 16vw;
+        border-radius: 0vw 0vw 0.4vw 0.4vw ;
+        box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75);
+
+    }
+
+    .swap-red-cargo {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        top: 10vw;
+        border-radius: 0.4vw 0.4vw 0vw 0vw ;
+        box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75) 
+    }
+    .swap-blue-cargo {
+        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
+        top: 16vw;
+        border-radius: 0vw 0vw 0.4vw 0.4vw ;
+        box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75);
+
+    }
+    .blue-line {
+        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
+        height: .2vw;
+        width: 15vw;
+        opacity: 0.2;
+    }
+    .top-blue-line {
+        position: absolute;
+        top: 4vw;
+    }
+    .bottom-blue-line {
+        position: absolute;
+        top: 15vw;
+    }
+    .red-line {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        height: .2vw;
+        width: 15vw;
+        opacity: 0.2;
+
+    }
+
+    .top-red-line {
+        position: absolute;
+        top: 17vw;
+    }
+    .bottom-red-line {
+        position: absolute;
+        top: 28vw;
+    }
+    
+    .gray-square {
+        position: absolute;
+        height: 2.5vw;
+        width: 2.75vw;
+        background-color: #21282B;
+        border-radius: .2vw;
+        display: flex;
+    }
+    .square-text {
+        font-size: 1.5vw;
+        margin: auto;
+        color: #F5F7FC;
+    }
+    .top-square {
+        top: .75vw;
+    }
+    .bottom-square {
+        top: 28.875vw;
+    }
+    .left-square {
+        left: 2.75vw;
+    }
+    .middle-square {
+        left: 6.125vw;
+    }
+    .right-square {
+        left: 9.5vw;
+    }
+    
+    /*Jetson*/
+
+    #console-output {
+        background-color: #141A1C;
+        position: absolute;
+        left: 1vw;
+        top: 1vw;
+        height: 9vw;
+        width: 24vw;
+        border-radius: .4vw;
+        overflow: auto;
+    }
+    #console-interior {
+        margin: 1vw;
+        font-size: .75vw;
+        font-family: monospace;
+    }
+
+    .color-icon {
+        background: -webkit-linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    #light {
+        color: #415359;
+        position: absolute; 
+
+        font-size: 3vw;
+        left: 27vw;
+        top: 4vw;
+    }
+
+    
+    /*Orientation*/
+    .orientation-grid {
+        position: absolute;
+        left: .5vw;
+        top: .5vw;
+        height: auto;
+        width: 14vw;
+    }
+    .arrow {
+        transform: rotate(0deg);
+    }
+    .orientation-value {
+        z-index: 0;
+        position: absolute;
+        top: 13.25vw;
+        left: .5vw;
+        font-size: 1.25vw;
+    }
+    
+    .orientation-reset {
+        top: 12.5vw!IMPORTANT;
+        left: 12.6vw!IMPORTANT;
+    }
+
+    /* Robot Diagram */
+    .robot-diagram {
+        position: absolute;
+        height: 28vw;
+        width: auto;
+        left: .5vw;
+    }
+    .diagram-bar {
+        position: absolute;
+        left: 25.75vw;
+    }
+    .diagram-bar .bar{
+        position: absolute;
+        width: 5.5vw;
+        height: .9vw;
+    }
+    .diagram-bar .bar-value{
+        position: absolute;
+        margin-left: 6vw;
+        font-size: .75vw;
+        top: .0625vw;
+    }
+    #diagram-left-claw, #diagram-left-claw-value {
+        position: absolute;
+        top: 1.25vw;
+    }
+
+    #diagram-right-claw, #diagram-right-claw-value {
+        position: absolute;
+        top: 4vw;
+    }
+    #diagram-left-ball-intake, #diagram-left-ball-intake-value {
+        position: absolute;
+        top: 6.8vw;
+    }
+    #diagram-right-ball-intake,  #diagram-right-ball-intake-value {
+        position: absolute;
+        top: 9.6vw;
+    }
+    #diagram-rotation, #diagram-rotation-value {
+        position: absolute;
+        top: 12.4vw;
+    }
+    #diagram-elevator, #diagram-elevator-value {
+        position: absolute;
+        top: 15.2vw;
+    }
+    #diagram-left-drive, #diagram-left-drive-value {
+        position: absolute;
+        top: 17.95vw;
+    }
+    #diagram-right-drive, #diagram-right-drive-value {
+        position: absolute;
+        top: 20.85vw;
+    }
+    
+    /*PID*/
+    .pid-form {
+        display: inline-block;
+        position: absolute;
+        top: .75vw;
+    }
+    .pid-position {
+        display: block;
+        margin: 1vw;
+        position: relative;
+    }
+    .pid-input {
+        width: 14vw;
+        background-color: #415359;
+        border: none;
+        border-radius: .4vw;
+        padding: .75vw;
+        font-weight: 600;
+        outline: none;
+        font-size: 1.375vw;
+    }
+    .pid-input::placeholder {
+        color: #65747a;
+    }
+    .checka {
+        height: 2vw;
+        width: 2vw;
+        position: absolute;
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75);
+        top: -0.5vw;
+        left: 14.25vw;
+        border-radius: 100%;
+        /* z-index: 10; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.25vw;
+    } 
+    .pid button {
+        background-color: #415359;
+        text-align: center;
+        border: none;
+        padding: .4vw .6vw .4vw .6vw;
+        font-size: 1.125vw;
+        font-weight: 600;
+        border-radius: 0.3vw;
+        box-shadow: 0 0 1.vw rgba(0, 0, 0, .75);
+        outline: none;
+        position: absolute;
+        top: 11vw;
+        left: 18.5vw;
+    }
+    .pid button:hover {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+    }
+    /* .pid button:focus {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+    } */
+    
+    /*Encoders*/
+    .encoder {
+        background-color: #415359;
+        border-radius: .3vw;
+        box-shadow: 0 0 .3vw rgba(0, 0, 0, .5);
+    }
+    .encoder:first-child {
+        position: absolute;
+        height: 7vw;
+        width: 6.5vw;
+        left: .75vw;
+        top: .75vw;
+    }
+    .encoder:nth-child(2) {
+        position: absolute;
+        height: 7vw;
+        width: 6.5vw;
+        left: 7.75vw;
+        top: .75vw;
+    }
+    .encoder:nth-child(3) {
+        position: absolute;
+        height: 2.75vw;
+        width: 8vw;
+        left: .75vw;
+        top: 8.25vw;
+    }
+    .encoder:nth-child(4) {
+        position: absolute;
+        height: 2.75vw;
+        width: 8vw;
+        left: .75vw;
+        top: 11.5vw;
+    }
+    .encoder:nth-child(5) {
+        position: absolute;
+        height: 6vw;
+        width: 5vw;
+        left: 9.25vw;
+        top: 8.25vw;
+    }
+    .encoder-label {
+        font-weight: 300;
+        text-align: center;
+    }
+    .encoder-val {
+        font-weight: 700;
+        text-align: center;
+    }
+    .encoder:first-child .encoder-label, .encoder:nth-child(2) .encoder-label {
+        font-size: .625vw;
+        margin-top: 1.75vw;
+    }
+    .encoder:first-child .encoder-val, .encoder:nth-child(2) .encoder-val {
+        margin-top: .625vw;
+        font-size: 1.5vw;
+    }
+    .encoder:nth-child(3) .encoder-label, .encoder:nth-child(4) .encoder-label {
+        font-size: .6vw;
+        margin-top: 0.5vw;
+    }
+    .encoder:nth-child(3) .encoder-val, .encoder:nth-child(4) .encoder-val {
+        font-size: 1.125vw;
+        margin-top: 0.025vw;
+    }
+    .encoder:nth-child(5) .encoder-label {
+        font-size: .6vw;
+        margin-top: 1.75vw;
+    }
+    .encoder:nth-child(5) .encoder-val {
+        font-size: 1.125vw;
+        margin-top: .5vw;
+    }
+    .encoder-reset {
+        position: absolute;
+        width: 1vw;
+        height: 1vw;
+        font-size: .6vw;
+        top: 5.75vw!IMPORTANT;
+        left: 5vw!IMPORTANT;
+    }
+    .landscape-reset {
+        top: 1.5vw!IMPORTANT;
+        left: 6.75vw!IMPORTANT;
+    }
+    .portrait-reset {
+        top: 4.7vw!IMPORTANT;
+        left: 3.75vw!IMPORTANT;
+    }
+
+    /*Extra Box*/
+
+    .pusheen {
+        width: 20vw;
+        height: auto;
+        position: absolute;
+        left: 6vw;
+        top: 1.5vw;
+    }
+
+
+    /* Login Stuff */
+    #login {
+        position: fixed;
+        display: none;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: black;
+    }
+    body.login #login {
+        display: flex;
+    }
+    #login :disabled {
+        opacity: 0.6;
+    }
+    #login > * {
+        height: 3vw;
+        color: #141A1C;
+        padding: 0vw 1vw 0vw 1vw;
+        border: none;
+        outline: none;
+        border-radius: 4vw 0 0 4vw;
+    }
+    #login > button {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
+        border: none;
+        padding: 0vw 1vw 0vw 1vw;
+        font-family: "SF", sans-serif;
+        border-radius: 0 4vw 4vw 0;
+        color: #F5F7FC;
+    }
+    

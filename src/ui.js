@@ -106,6 +106,10 @@ let ui = {
         rightRocket2: document.getElementById('field-right-rocket-2'),
         cargo1: document.getElementById('field-cargo-1'),
         cargo2: document.getElementById('field-cargo-2'),
+        topLine1: document.getElementById('field-top-line-1'),
+        bottomLine1: document.getElementById('field-bottom-line-1'),
+        topLine2: document.getElementById('field-top-line-2'),
+        bottomLine2: document.getElementById('field-bottom-line-2'),
     }
 };
 
@@ -173,7 +177,8 @@ function onStart () {
 
     
 
-var value = false;
+    
+
     // var myVar = setInterval(myTimer, 10);
     //         function myTimer() {
     //             var d = new Date();
@@ -344,9 +349,9 @@ ui.auto.right.onclick = function() {
 
 // Not yet sure how to format these
 NetworkTables.addKeyListener('/SmartDashboard/consoleOutput', (key, value) => {
-    var current = jetson.console.getValue;
-    var newString = current.concat(value);
-    jetson.console.putValue(newString);
+    var newValue = current.concat(value).concat("\n");
+    NetworkTables.putValue('/SmartDashboard/consoleOutput', newValue);
+    ui.jetson.console.innerHTML = NetworkTables.getValue('/SmartDashboard/consoleOutput');
 });
 NetworkTables.addKeyListener('/SmartDashboard/jetsonConnected', (key, value) => {
     if (value) {
@@ -378,6 +383,15 @@ NetworkTables.addKeyListener('/SmartDashboard/isred', (key, value) => {
         ui.field.rightRocket2.classList.remove('blue');
         ui.field.leftRocket2.classList.add('swapRed');
         ui.field.rightRocket2.classList.add('swapRed');
+        ui.field.topLine1.classList.remove('red-line');
+        ui.field.topLine1.classList.add('blue-line');
+        ui.field.bottomLine1.classList.remove('red-line');
+        ui.field.bottomLine1.classList.add('blue-line');
+        ui.field.topLine2.classList.remove('blue-line');
+        ui.field.topLine2.classList.add('red-line');
+        ui.field.bottomLine2.classList.remove('blue-line');
+        ui.field.bottomLine2.classList.add('red-line');
+        
     }
     else {
         ui.field.leftRocket1.classList.remove('blue');
@@ -392,22 +406,16 @@ NetworkTables.addKeyListener('/SmartDashboard/isred', (key, value) => {
         ui.field.cargo1.classList.add('swap-red-cargo')
         ui.field.cargo2.classList.remove('red-cargo')
         ui.field.cargo2.classList.add('swap-blue-cargo')
+        ui.field.topLine1.classList.remove('blue-line');
+        ui.field.topLine1.classList.add('red-line');
+        ui.field.bottomLine1.classList.remove('blue-line');
+        ui.field.bottomLine1.classList.add('red-line');
+        ui.field.topLine2.classList.remove('red-line');
+        ui.field.topLine2.classList.add('blue-line');
+        ui.field.bottomLine2.classList.remove('red-line');
+        ui.field.bottomLine2.classList.add('blue-line');
     }
-    //Replace with new field color switch
-
-    // if(value) {
-    //   ui.field.teamcolor.style.background = 'red';
-    //   ui.field.opponentcolor.style.background = 'blue';
-    // }else {
-    //   ui.field.teamcolor.style.background = 'blue';
-    //   ui.field.opponentcolor.style.background = 'red';
-    // }
-    // ui.field.scale1left.style.background = (value == NetworkTables.getValue('/SmartDashboard/scale1left')) ? 'red' : 'blue';
-    // ui.field.scale1right.style.background = (value == NetworkTables.getValue('/SmartDashboard/scale1left')) ? 'blue' : 'red';
-    // ui.field.scale2left.style.background = (value == NetworkTables.getValue('/SmartDashboard/scale2left')) ? 'red' : 'blue';
-    // ui.field.scale2right.style.background = (value == NetworkTables.getValue('/SmartDashboard/scale2left')) ? 'blue' : 'red';
-    // ui.field.scale3left.style.background = (value == NetworkTables.getValue('/SmartDashboard/scale3left')) ? 'red' : 'blue';
-    // ui.field.scale3right.style.background = (value == NetworkTables.getValue('/SmartDashboard/scale3left')) ? 'blue' : 'red';
+   
 });
 // NetworkTables.addKeyListener('/SmartDashboard/scale1left', (key, value) => {
 //     ui.field.scale1left.style.background = (value == NetworkTables.getValue('/SmartDashboard/isred')) ? 'red' : 'blue';
