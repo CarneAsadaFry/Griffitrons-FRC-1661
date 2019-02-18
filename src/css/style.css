@@ -210,11 +210,9 @@
         left: 6vw;
     }
     .blue {
-        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
         top: 5.5vw;
     }
     .red {
-        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
         top: 23vw;
     }
     .left {
@@ -226,17 +224,22 @@
         left: 11.75vw;
     }
     .blue-cargo {
-        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
         top: 10vw;
         border-radius: 0.4vw 0.4vw 0vw 0vw ;
         box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75) 
     }
     .red-cargo {
-        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
         top: 16vw;
         border-radius: 0vw 0vw 0.4vw 0.4vw ;
         box-shadow: 0 0 1.2vw rgba(0, 0, 0, .75);
 
+    }
+
+    .color-blue {
+        background: linear-gradient(135deg, #00C0E6 0%,#00FFD0 100%);
+    }
+    .color-red {
+        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
     }
 
     .swap-red-cargo {
