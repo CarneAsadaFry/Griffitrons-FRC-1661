@@ -81,6 +81,11 @@ let ui = {
         left: document.getElementById('field-bottom-left-square'),
         middle: document.getElementById('field-bottom-middle-square'),
         right: document.getElementById('field-bottom-right-square'),
+        leftPath: document.getElementById('automode-left'),
+        leftMiddlePath: document.getElementById('automode-middle-left'),
+        rightMiddlePath: document.getElementById('automode-middle-right'),
+        rightPath: document.getElementById('automode-right'),
+        isMiddleRight: document.getElementById('is-right-switch'),
     },
     jetson: {
         console: document.getElementById('console-interior'),
@@ -170,7 +175,11 @@ ui.encoder.elevatorEncReset.onclick = function() {
 };
 
 function onStart () {
-    
+
+    ui.auto.leftPath.hidden = true;
+    ui.auto.leftMiddlePath.hidden = true;
+    ui.auto.rightMiddlePath.hidden = true;
+    ui.auto.rightPath.hidden = true;
 }
 
 NetworkTables.addKeyListener('/SmartDashboard/lDrive', (key, value) => {
@@ -284,40 +293,51 @@ ui.pid.save.onclick = function() {
   ui.pid.dCheck.style.opacity = "1";
 }
 
+function handleChange(checkbox) {
+    if(checkbox.checked == true){
+        NetworkTables.putValue('/SmartDashboard/pants', true);
+    }else{
+        NetworkTables.putValue('/SmartDashboard/pants', false);
+    }
+}
+
+
+NetworkTables.addKeyListener('/SmartDashboard/pants', (key, value) => {
+
+    ui.auto.leftMiddlePath.hidden = true;
+    ui.auto.rightMiddlePath.hidden = true;
+    let currentMode = NetworkTables.getValue('/SmartDashboard/automode');
+    if (currentMode == 1) {
+        if (value)  ui.auto.rightMiddlePath.hidden = false;
+     else ui.auto.leftMiddlePath.hidden = false;
+    }
+
+});
+
 NetworkTables.addKeyListener('/SmartDashboard/automode', (key, value) => {
 
-    //Replace this with new mechanism.
+    ui.auto.left.style.background = '#21282B';
+    ui.auto.middle.style.background = '#21282B';
+    ui.auto.right.style.background = '#21282B';
 
+    ui.auto.leftPath.hidden = true;
+    ui.auto.leftMiddlePath.hidden = true;
+    ui.auto.rightMiddlePath.hidden = true;
+    ui.auto.rightPath.hidden = true;
+ 
+   let pantsVal = NetworkTables.getValue('/SmartDashboard/pants');
+   if(value === 0){
+     ui.auto.left.style.background = 'linear-gradient(135deg, #f16000 0%,#ff2b51 100%)';
+     ui.auto.leftPath.hidden = false;
+   } else if(value === 1){
+     ui.auto.middle.style.background = 'linear-gradient(135deg, #f16000 0%,#ff2b51 100%)';
+     if(pantsVal)  ui.auto.rightMiddlePath.hidden = false;
+     else  ui.auto.leftMiddlePath.hidden = false;
+   } else {
+     ui.auto.right.style.background = 'linear-gradient(135deg, #f16000 0%,#ff2b51 100%)';
+     ui.auto.rightPath.hidden = false;
 
-//    ui.auto.left.style.background = '#A9A9A9';
-//    ui.auto.middle.style.background = '#A9A9A9';
-//    ui.auto.right.style.background = '#A9A9A9';
-//    ui.field.leftcircle.style.background = '#222';
-//    ui.field.middlecircle.style.background = '#222';
-//    ui.field.rightcircle.style.background = '#222';
-//    ui.field.leftfield.style.opacity = 0;
-//    ui.field.leftpantsfield.style.opacity = 0;
-//    ui.field.middlefield.style.opacity = 0;
-//    ui.field.middlepantsfield.style.opacity = 0;
-//    ui.field.rightfield.style.opacity = 0;
-//    ui.field.rightpantsfield.style.opacity = 0;
-//    let pantsVal = NetworkTables.getValue('/SmartDashboard/pants');
-//    if(value === 0){
-//      ui.auto.left.style.background = 'red';
-//      ui.field.leftcircle.style.background = 'red';
-//      if(pantsVal) ui.field.leftpantsfield.style.opacity = 1;
-//      else ui.field.leftfield.style.opacity = 1;
-//    } else if(value === 1){
-//      ui.auto.middle.style.background = 'red';
-//      ui.field.middlecircle.style.background = 'red';
-//      if(pantsVal) ui.field.middlepantsfield.style.opacity = 1;
-//      else ui.field.middlefield.style.opacity = 1;
-//    } else {
-//      ui.auto.right.style.background = 'red';
-//      ui.field.rightcircle.style.background = 'red';
-//      if(pantsVal) ui.field.rightpantsfield.style.opacity = 1;
-//      else ui.field.rightfield.style.opacity = 1;
-//    }
+   }
 });
 ui.auto.left.onclick = function() {
   NetworkTables.putValue('/SmartDashboard/automode', 0);

@@ -52,6 +52,14 @@
         <div class="red-cargo cargo color-red" id="field-cargo-1"></div>
             <div class="blue-cargo cargo color-blue" id="field-cargo-2"></div>
         </div>
+
+        <img class="automode-path" id="automode-left" src="src/img/automode-left.png">
+        <img class="automode-path" id="automode-right" src="src/img/automode-right.png">
+        <img class="automode-path" id="automode-middle-left" src="src/img/automode-middle-left.png">
+        <img class="automode-path" id="automode-middle-right" src="src/img/automode-middle-right.png">
+
+        
+
         
         
     </div>
@@ -254,7 +262,7 @@
     <div class="toggle-group">
         <!-- <div class="toggle-label">Some mode</div> -->
         <label class="switch toggle-switch" id="switch">
-            <input type="checkbox" class="toggle-switch">
+            <input id="is-right-switch" onchange='handleChange(this);' type="checkbox" class="toggle-switch">
             <span class="slider round"></span>
         </label>
     </div>

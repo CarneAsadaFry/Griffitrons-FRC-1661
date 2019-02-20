@@ -293,6 +293,7 @@
         background-color: #21282B;
         border-radius: .2vw;
         display: flex;
+        z-index: 5;
     }
     .square-text {
         font-size: 1.5vw;
@@ -314,6 +315,29 @@
     .right-square {
         left: 9.5vw;
     }
+    .automode-path {
+        position: absolute;
+        height: 12vw;
+    }
+    #automode-left {
+        left: -1vw;
+        top: 19.5vw;
+    }
+    #automode-right {
+        left: 8vw;
+        top: 19.5vw;
+    }
+    #automode-middle-left {
+        left: .3vw;
+        top: 19.5vw;
+    }
+    #automode-middle-right {
+        left: 6.75vw;
+        top: 19.5vw;
+    }
+
+
+
     
     /*Jetson*/
 
@@ -485,9 +509,6 @@
     .pid button:hover {
         background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
     }
-    /* .pid button:focus {
-        background: linear-gradient(135deg, #f16000 0%,#ff2b51 100%);
-    } */
     
     /*Encoders*/
     .encoder {
@@ -692,6 +713,7 @@
         bottom: 0;
         background-color: rgba(0, 0, 0, 0.8);
         color: black;
+        z-index: 7;
     }
     body.login #login {
         display: flex;
